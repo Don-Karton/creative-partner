@@ -59,22 +59,22 @@
             border: none;
             font-family: inherit;
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
         }
 
         .fixed-order-button.hidden {
             opacity: 0;
-            transform: scale(0.8);
+            transform: translateY(20px);
             pointer-events: none;
         }
 
         .fixed-order-button:hover {
-            transform: translateY(-3px) scale(1);
+            transform: translateY(-3px);
             box-shadow: 0 8px 35px rgba(62, 185, 165, 0.5);
         }
 
         .fixed-order-button.hidden:hover {
-            transform: scale(0.8);
+            transform: translateY(20px);
         }
 
         .fixed-order-button .button-text {
@@ -413,9 +413,6 @@
             box-shadow: 0 4px 20px rgba(62, 185, 165, 0.3);
             position: relative;
             overflow: hidden;
-            border: none;
-            font-family: inherit;
-            cursor: pointer;
         }
 
         .cta-button::before {
@@ -862,33 +859,6 @@
             box-shadow: 0 5px 20px rgba(62, 185, 165, 0.4);
         }
 
-        .form-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Loading state */
-        .loading {
-            position: relative;
-            color: transparent;
-        }
-
-        .loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border: 2px solid transparent;
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
         /* Footer */
         footer {
             background: var(--text-dark);
@@ -1088,6 +1058,31 @@
             margin-bottom: 1rem;
         }
 
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff40;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .form-submit.loading .loading-spinner {
+            display: inline-block;
+        }
+
+        .form-submit.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 1024px) {
             .nav-menu {
@@ -1235,10 +1230,6 @@
             animation: spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         /* Notification */
         .notification {
             position: fixed;
@@ -1261,25 +1252,17 @@
             right: 20px;
         }
 
-        .notification.success {
-            border-left-color: #28a745;
+        .notification.error {
+            border-left-color: #e74c3c;
         }
 
-        .notification.error {
-            border-left-color: #dc3545;
+        .notification.error .notification-icon {
+            color: #e74c3c;
         }
 
         .notification-icon {
             font-size: 1.5rem;
             color: var(--primary-color);
-        }
-
-        .notification.success .notification-icon {
-            color: #28a745;
-        }
-
-        .notification.error .notification-icon {
-            color: #dc3545;
         }
 
         .notification-text {
@@ -1388,8 +1371,8 @@
                     </div>
                 </div>
                 
-                <div class="cta-group" id="heroCTAGroup">
-                    <button class="cta-button" onclick="showOrderForm()" data-lang-key="ctaOrder">Заказать услугу</button>
+                <div class="cta-group" id="ctaButtonsGroup">
+                    <a href="#services" class="cta-button" data-lang-key="ctaOrder">Заказать услугу</a>
                     <a href="#portfolio" class="cta-button cta-button-outline" data-lang-key="ctaPortfolio">Смотреть портфолио</a>
                 </div>
             </div>
@@ -1531,7 +1514,10 @@
                         <label class="form-label" data-lang-key="formMessage">Расскажите о проекте</label>
                         <textarea class="form-textarea" name="message" placeholder="Опишите вашу идею или задачу..." data-lang-key="formMessagePlaceholder"></textarea>
                     </div>
-                    <button type="submit" class="form-submit" data-lang-key="formSubmit" id="contactSubmitBtn">Отправить заявку</button>
+                    <button type="submit" class="form-submit" data-lang-key="formSubmit">
+                        <span class="loading-spinner"></span>
+                        Отправить заявку
+                    </button>
                 </form>
             </div>
         </div>
@@ -1596,7 +1582,7 @@
                 <span data-lang-key="cartTotal">Итого:</span>
                 <span id="cartTotal">$0</span>
             </div>
-            <button class="form-submit" onclick="checkout()" data-lang-key="cartCheckout" id="cartCheckoutBtn">Оформить заказ</button>
+            <button class="form-submit" onclick="checkout()" data-lang-key="cartCheckout">Оформить заказ</button>
         </div>
     </div>
 
@@ -1622,7 +1608,10 @@
                     <label class="form-label" data-lang-key="modalComment">Комментарий к заказу</label>
                     <textarea class="form-textarea" name="comment"></textarea>
                 </div>
-                <button type="submit" class="form-submit" data-lang-key="modalSubmit" id="orderSubmitBtn">Отправить заказ</button>
+                <button type="submit" class="form-submit" data-lang-key="modalSubmit">
+                    <span class="loading-spinner"></span>
+                    Отправить заказ
+                </button>
             </form>
         </div>
     </div>
@@ -1634,12 +1623,21 @@
         let currentCurrency = 'usd';
         const exchangeRate = 2.7;
 
-        // Telegram Bot Configuration
-        const TELEGRAM_BOT_TOKEN = '7892330945:AAFgO4PxaLtgKBg2LzPHmCfTIdSgKx5QxDc'; // Replace with your bot token
-        const TELEGRAM_CHAT_ID = '1024823598'; // Replace with your chat ID
+        // Email.js Configuration
+        const EMAILJS_CONFIG = {
+            serviceId: 'service_your_id', // Замените на ваш Service ID в EmailJS
+            templateId: 'template_your_id', // Замените на ваш Template ID в EmailJS
+            publicKey: 'your_public_key' // Замените на ваш Public Key в EmailJS
+        };
 
-        // Google Sheets Configuration  
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBX9DlKI2jhHCxlzQnDGQT1j6cPU4oKLaHm6wUMv3tW6vQxh6_4Y7MsQQU-Mq4I9t8nQ/exec'; // Replace with your script URL
+        // Telegram Bot Configuration
+        const TELEGRAM_CONFIG = {
+            botToken: 'YOUR_BOT_TOKEN', // Замените на токен вашего бота
+            chatId: 'YOUR_CHAT_ID' // Замените на ID чата/канала
+        };
+
+        // Google Sheets Configuration
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
 
         // Language translations
         const translations = {
@@ -1800,11 +1798,10 @@
                 modalComment: 'Комментарий к заказу',
                 modalSubmit: 'Отправить заказ',
                 
-                // Notifications
+                // Notification
                 notificationText: 'Услуга добавлена в корзину',
                 notificationOrderSent: 'Заявка отправлена!',
-                notificationError: 'Ошибка при отправке. Попробуйте еще раз.',
-                notificationSending: 'Отправка...',
+                notificationError: 'Произошла ошибка. Попробуйте еще раз.',
             },
             en: {
                 // Navigation
@@ -1963,11 +1960,10 @@
                 modalComment: 'Order comment',
                 modalSubmit: 'Submit order',
                 
-                // Notifications
+                // Notification
                 notificationText: 'Service added to cart',
                 notificationOrderSent: 'Request sent!',
-                notificationError: 'Error sending. Please try again.',
-                notificationSending: 'Sending...',
+                notificationError: 'An error occurred. Please try again.',
             },
             ge: {
                 // Navigation
@@ -2126,11 +2122,10 @@
                 modalComment: 'კომენტარი შეკვეთაზე',
                 modalSubmit: 'შეკვეთის გაგზავნა',
                 
-                // Notifications
+                // Notification
                 notificationText: 'სერვისი დამატებულია კალათაში',
                 notificationOrderSent: 'განაცხადი გაგზავნილია!',
-                notificationError: 'შეცდომა გაგზავნისას. სცადეთ თავიდან.',
-                notificationSending: 'იგზავნება...',
+                notificationError: 'დაფიქსირდა შეცდომა. სცადეთ ხელახლა.',
             }
         };
 
@@ -2191,30 +2186,6 @@
                 ]
             }
         };
-
-        // Floating button visibility handler
-        function handleFloatingButtonVisibility() {
-            const fixedButton = document.getElementById('fixedOrderButton');
-            const heroCTA = document.getElementById('heroCTAGroup');
-            const contactForm = document.querySelector('.contact-form');
-            
-            const heroRect = heroCTA.getBoundingClientRect();
-            const contactRect = contactForm.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            // Check if hero CTA is visible
-            const heroVisible = heroRect.top < windowHeight && heroRect.bottom > 0;
-            
-            // Check if contact form is visible
-            const contactVisible = contactRect.top < windowHeight && contactRect.bottom > 0;
-            
-            // Hide fixed button when other order buttons are visible
-            if (heroVisible || contactVisible) {
-                fixedButton.classList.add('hidden');
-            } else {
-                fixedButton.classList.remove('hidden');
-            }
-        }
 
         // Initialize services
         function initializeServices() {
@@ -2319,6 +2290,38 @@
             return `${t.priceFrom} $${basePrice}`;
         }
 
+        // Fixed button visibility logic
+        function initializeFixedButton() {
+            const fixedButton = document.getElementById('fixedOrderButton');
+            const ctaButtonsGroup = document.getElementById('ctaButtonsGroup');
+            const contactForm = document.querySelector('#contactForm');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '50px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                let shouldHideButton = false;
+                
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        shouldHideButton = true;
+                    }
+                });
+                
+                if (shouldHideButton) {
+                    fixedButton.classList.add('hidden');
+                } else {
+                    fixedButton.classList.remove('hidden');
+                }
+            }, observerOptions);
+
+            // Observe elements with similar functionality
+            if (ctaButtonsGroup) observer.observe(ctaButtonsGroup);
+            if (contactForm) observer.observe(contactForm);
+        }
+
         // Language change handler
         function changeLanguage(lang) {
             currentLang = lang;
@@ -2353,18 +2356,10 @@
             updateCart();
         }
 
-        // Email service
-        async function sendEmail(data) {
-            // This is a placeholder for email functionality
-            // You'll need to implement this with your email service (EmailJS, Nodemailer, etc.)
-            console.log('Email data:', data);
-            return Promise.resolve();
-        }
-
-        // Google Sheets service
+        // Send to Google Sheets
         async function sendToGoogleSheets(data) {
             try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
@@ -2372,6 +2367,7 @@
                     },
                     body: JSON.stringify(data)
                 });
+                console.log('Data sent to Google Sheets');
                 return true;
             } catch (error) {
                 console.error('Error sending to Google Sheets:', error);
@@ -2379,55 +2375,84 @@
             }
         }
 
-        // Telegram service
+        // Send to Telegram
         async function sendToTelegram(data) {
             try {
-                const message = formatTelegramMessage(data);
-                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                const message = `
+🚀 Новая заявка с сайта Creative.Partner
+
+👤 Имя: ${data.name}
+📞 Контакт: ${data.contact}
+📧 Email: ${data.email || 'Не указан'}
+🎯 Услуга: ${data.service}
+💬 Сообщение: ${data.message}
+🛒 Корзина: ${data.cart || 'Пуста'}
+💰 Сумма: ${data.total || '0'}
+🌐 Язык: ${data.language}
+💱 Валюта: ${data.currency}
+🕒 Время: ${data.timestamp}
+                `.trim();
+
+                const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
                 
-                const response = await fetch(url, {
+                const response = await fetch(telegramUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
+                        chat_id: TELEGRAM_CONFIG.chatId,
                         text: message,
                         parse_mode: 'HTML'
                     })
                 });
-                
-                return response.ok;
+
+                if (response.ok) {
+                    console.log('Message sent to Telegram');
+                    return true;
+                } else {
+                    throw new Error('Failed to send to Telegram');
+                }
             } catch (error) {
                 console.error('Error sending to Telegram:', error);
                 return false;
             }
         }
 
-        function formatTelegramMessage(data) {
-            const t = translations[currentLang];
-            let message = `<b>🎨 Creative.Partner - Новая заявка!</b>\n\n`;
-            message += `<b>Тип:</b> ${data.type === 'contact' ? 'Контакт' : 'Заказ'}\n`;
-            message += `<b>Имя:</b> ${data.name}\n`;
-            message += `<b>Контакт:</b> ${data.contact || data.email || data.phone}\n`;
-            if (data.phone && data.phone !== data.contact) {
-                message += `<b>Телефон:</b> ${data.phone}\n`;
+        // Send Email (using EmailJS)
+        async function sendEmail(data) {
+            try {
+                // Initialize EmailJS (you need to include EmailJS library)
+                if (typeof emailjs === 'undefined') {
+                    console.warn('EmailJS library not loaded');
+                    return false;
+                }
+
+                const templateParams = {
+                    from_name: data.name,
+                    from_email: data.email || data.contact,
+                    contact: data.contact,
+                    service: data.service,
+                    message: data.message,
+                    cart: data.cart || 'Пусто',
+                    total: data.total || '0',
+                    language: data.language,
+                    timestamp: data.timestamp
+                };
+
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.serviceId,
+                    EMAILJS_CONFIG.templateId,
+                    templateParams,
+                    EMAILJS_CONFIG.publicKey
+                );
+
+                console.log('Email sent successfully:', response);
+                return true;
+            } catch (error) {
+                console.error('Error sending email:', error);
+                return false;
             }
-            if (data.service) {
-                message += `<b>Услуга:</b> ${data.service}\n`;
-            }
-            if (data.cart) {
-                message += `<b>Корзина:</b> ${data.cart}\n`;
-                message += `<b>Сумма:</b> ${data.total}\n`;
-            }
-            if (data.message) {
-                message += `<b>Сообщение:</b> ${data.message}\n`;
-            }
-            message += `\n<b>Язык:</b> ${data.language.toUpperCase()}`;
-            message += `\n<b>Валюта:</b> ${data.currency.toUpperCase()}`;
-            message += `\n<b>Время:</b> ${data.timestamp}`;
-            
-            return message;
         }
 
         // Loader
@@ -2436,6 +2461,7 @@
                 document.getElementById('loader').classList.add('hidden');
             }, 1000);
             initializeServices();
+            initializeFixedButton();
         });
 
         // Header scroll effect
@@ -2446,9 +2472,6 @@
             } else {
                 header.classList.remove('scrolled');
             }
-            
-            // Handle floating button visibility
-            handleFloatingButtonVisibility();
         });
 
         // Mobile menu toggle
@@ -2604,48 +2627,46 @@
         }
 
         // Notification
-        function showNotification(text, type = 'success') {
+        function showNotification(text, isError = false) {
             const notification = document.getElementById('notification');
             const notificationText = notification.querySelector('.notification-text');
             const notificationIcon = notification.querySelector('.notification-icon');
             
             notificationText.textContent = text;
-            notification.className = `notification show ${type}`;
             
-            if (type === 'success') {
+            if (isError) {
+                notification.classList.add('error');
+                notificationIcon.textContent = '✕';
+            } else {
+                notification.classList.remove('error');
                 notificationIcon.textContent = '✓';
-            } else if (type === 'error') {
-                notificationIcon.textContent = '⚠';
-            } else if (type === 'info') {
-                notificationIcon.textContent = 'ℹ';
             }
             
+            notification.classList.add('show');
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 4000);
+            }, 5000);
         }
 
         function hideNotification() {
             document.getElementById('notification').classList.remove('show');
         }
 
-        // Set button loading state
-        function setButtonLoading(buttonId, loading) {
-            const button = document.getElementById(buttonId);
-            if (loading) {
-                button.disabled = true;
-                button.classList.add('loading');
-            } else {
-                button.disabled = false;
-                button.classList.remove('loading');
-            }
-        }
-
         // Form submissions
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const formData = new FormData(this);
+            
+            // Show loading state
+            const submitBtn = this.querySelector('.form-submit');
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
             await submitForm(formData, 'contact');
+            
+            // Remove loading state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
         });
 
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
@@ -2660,22 +2681,26 @@
                 formData.append('total', currentCurrency === 'gel' ? `₾${Math.round(total * exchangeRate)}` : `$${total}`);
             }
             
+            // Show loading state
+            const submitBtn = this.querySelector('.form-submit');
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
             await submitForm(formData, 'order');
+            
+            // Remove loading state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
         });
 
         async function submitForm(formData, type = 'contact') {
-            const buttonId = type === 'contact' ? 'contactSubmitBtn' : 'orderSubmitBtn';
-            
             try {
-                setButtonLoading(buttonId, true);
-                showNotification(translations[currentLang].notificationSending, 'info');
-                
-                // Prepare data for all services
+                // Prepare data for all platforms
                 const data = {
                     timestamp: new Date().toLocaleString(),
                     type: type,
                     name: formData.get('name'),
-                    contact: formData.get('contact') || formData.get('email'),
+                    contact: formData.get('contact') || formData.get('phone'),
                     email: formData.get('email') || '',
                     phone: formData.get('phone') || '',
                     service: formData.get('service') || '',
@@ -2686,20 +2711,20 @@
                     currency: currentCurrency
                 };
                 
-                // Send to all services
+                // Send to all platforms simultaneously
                 const promises = [
-                    sendEmail(data),
                     sendToGoogleSheets(data),
-                    sendToTelegram(data)
+                    sendToTelegram(data),
+                    sendEmail(data)
                 ];
                 
                 const results = await Promise.allSettled(promises);
                 
-                // Check if at least one service succeeded
-                const hasSuccess = results.some(result => result.status === 'fulfilled' && result.value === true);
+                // Check if at least one method succeeded
+                const anySucceeded = results.some(result => result.status === 'fulfilled' && result.value === true);
                 
-                if (hasSuccess) {
-                    showNotification(translations[currentLang].notificationOrderSent, 'success');
+                if (anySucceeded) {
+                    showNotification(translations[currentLang].notificationOrderSent);
                     
                     // Reset form and close modal
                     if (type === 'order') {
@@ -2711,14 +2736,12 @@
                     // Reset the form
                     document.getElementById(type === 'order' ? 'orderForm' : 'contactForm').reset();
                 } else {
-                    throw new Error('All services failed');
+                    throw new Error('All submission methods failed');
                 }
                 
             } catch (error) {
                 console.error('Error submitting form:', error);
-                showNotification(translations[currentLang].notificationError, 'error');
-            } finally {
-                setButtonLoading(buttonId, false);
+                showNotification(translations[currentLang].notificationError, true);
             }
         }
 
@@ -2744,11 +2767,18 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+    </script>
 
-        // Initialize floating button visibility on page load
-        setTimeout(() => {
-            handleFloatingButtonVisibility();
-        }, 100);
+    <!-- EmailJS Library -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            // Replace with your actual EmailJS public key
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+            }
+        })();
     </script>
 </body>
 </html>
