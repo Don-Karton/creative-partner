@@ -42,6 +42,41 @@
             padding: 0 5%;
         }
 
+        /* Fixed Order Button */
+        .fixed-order-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 25px rgba(62, 185, 165, 0.4);
+            cursor: pointer;
+            z-index: 999;
+            transition: var(--transition);
+            text-align: center;
+            border: none;
+            font-family: inherit;
+        }
+
+        .fixed-order-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(62, 185, 165, 0.5);
+        }
+
+        .fixed-order-button .button-text {
+            font-weight: 600;
+            font-size: 16px;
+            display: block;
+        }
+
+        .fixed-order-button .button-subtext {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
         /* Social Media Style Elements */
         .social-frame {
             border-radius: 20px;
@@ -59,65 +94,6 @@
             color: #ccc;
             font-size: 1.2rem;
             letter-spacing: 2px;
-        }
-
-        /* Fixed CTA Button */
-        .fixed-cta {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1500;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .fixed-cta-button {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: pulse 2s infinite;
-        }
-
-        .fixed-cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 30px rgba(62, 185, 165, 0.4);
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(62, 185, 165, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(62, 185, 165, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(62, 185, 165, 0); }
-        }
-
-        .fixed-cta-text {
-            background: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-dark);
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: var(--transition);
-        }
-
-        .fixed-cta:hover .fixed-cta-text {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Header */
@@ -141,10 +117,11 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
+            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
@@ -154,9 +131,10 @@
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
             list-style: none;
+            margin: 0 auto;
         }
 
         .nav-link {
@@ -165,6 +143,7 @@
             font-weight: 500;
             transition: var(--transition);
             position: relative;
+            font-size: 14px;
         }
 
         .nav-link::after {
@@ -184,19 +163,20 @@
 
         .nav-controls {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
         }
 
         .control-select {
             background: transparent;
             border: 2px solid var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
             cursor: pointer;
             transition: var(--transition);
             font-family: inherit;
             font-weight: 500;
+            font-size: 12px;
             color: var(--text-dark);
         }
 
@@ -209,7 +189,7 @@
         .mobile-menu-toggle {
             display: none;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
             cursor: pointer;
             background: none;
             border: none;
@@ -217,8 +197,8 @@
         }
 
         .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
+            width: 20px;
+            height: 2px;
             background: var(--text-dark);
             transition: var(--transition);
             border-radius: 2px;
@@ -281,7 +261,7 @@
         }
 
         .sketch-reality-container::before {
-            content: 'МЕЧТА → РЕАЛЬНОСТЬ';
+            content: attr(data-label);
             position: absolute;
             top: 1rem;
             left: 50%;
@@ -625,13 +605,13 @@
         }
 
         .category-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
         .category-count {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             opacity: 0.9;
         }
 
@@ -644,26 +624,29 @@
         }
 
         .service-item {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #eee;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.8rem;
+            background: var(--bg-light);
+            border-radius: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: var(--transition);
-        }
-
-        .service-item:last-child {
-            border-bottom: none;
+            cursor: pointer;
+            border: 2px solid transparent;
         }
 
         .service-item:hover {
-            padding-left: 1rem;
-            color: var(--primary-color);
+            background: white;
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+            box-shadow: var(--shadow-sm);
         }
 
-        .service-name {
-            font-size: 1rem;
-            font-weight: 500;
+        .service-item-name {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            flex: 1;
         }
 
         .service-price {
@@ -671,246 +654,61 @@
             color: var(--secondary-color);
             font-size: 0.95rem;
             white-space: nowrap;
-            margin-left: 0.5rem;
+            margin-left: 1rem;
         }
 
-        /* Individual Services Section */
-        .individual-services {
-            padding: 5rem 0;
-            background: white;
-        }
-
-        .services-disclaimer {
+        /* Disclaimer for prices */
+        .price-disclaimer {
             text-align: center;
             color: #666;
             font-style: italic;
-            margin-bottom: 3rem;
+            margin: 3rem 0;
             font-size: 0.9rem;
-            padding: 1rem;
+            padding: 1rem 2rem;
             background: #fef5e7;
             border-radius: 10px;
             border-left: 4px solid var(--secondary-color);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            transform-origin: left;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-color);
-        }
-
-        .service-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .service-card .service-price {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .service-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .service-features li {
-            padding: 0.3rem 0;
-            color: #666;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        .add-to-cart-button {
-            width: 100%;
-            padding: 0.8rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-
-        .add-to-cart-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(62, 185, 165, 0.4);
-        }
-
-        .turnkey-service {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border: 2px solid var(--secondary-color);
-        }
-
-        .turnkey-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Portfolio Section */
         .portfolio-section {
             padding: 5rem 0;
-            background: var(--bg-light);
-        }
-
-        .portfolio-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1.5rem;
             background: white;
-            border: 2px solid #ddd;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-            font-weight: 500;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .portfolio-item {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            cursor: pointer;
-            group: portfolio;
-        }
-
-        .portfolio-item:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .portfolio-image-container {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .portfolio-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .portfolio-item:hover .portfolio-image {
-            transform: scale(1.1);
         }
 
         .portfolio-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            transition: var(--transition);
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--bg-light);
+            border-radius: 25px;
+            border: 3px dashed #ddd;
+            margin: 3rem auto;
+            max-width: 800px;
         }
 
-        .portfolio-content {
-            padding: 2rem;
-        }
-
-        .portfolio-category {
-            font-size: 0.9rem;
+        .portfolio-placeholder h3 {
+            font-size: 2rem;
             color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .portfolio-title {
-            font-size: 1.3rem;
-            font-weight: 600;
             margin-bottom: 1rem;
-            color: var(--text-dark);
         }
 
-        .portfolio-description {
+        .portfolio-placeholder p {
             color: #666;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .portfolio-placeholder .emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
         }
 
         /* Contact Section */
         .contact-section {
             padding: 5rem 0;
-            background: white;
+            background: var(--bg-light);
         }
 
         .contact-container {
@@ -954,6 +752,11 @@
             transform: translateX(5px);
         }
 
+        .contact-details a {
+            color: inherit;
+            text-decoration: none;
+        }
+
         .contact-icon {
             font-size: 1.5rem;
             color: var(--primary-color);
@@ -971,7 +774,7 @@
             justify-content: center;
             width: 45px;
             height: 45px;
-            background: var(--bg-light);
+            background: white;
             color: var(--primary-color);
             border-radius: 50%;
             text-decoration: none;
@@ -987,10 +790,10 @@
         }
 
         .contact-form {
-            background: var(--bg-light);
+            background: white;
             padding: 3rem;
             border-radius: 25px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
         }
 
         .form-group {
@@ -1004,7 +807,7 @@
             font-weight: 500;
         }
 
-        .form-input, .form-textarea, .form-select {
+        .form-input, .form-textarea {
             width: 100%;
             padding: 1rem;
             border: 2px solid #e0e0e0;
@@ -1014,7 +817,7 @@
             background: white;
         }
 
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
+        .form-input:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(62, 185, 165, 0.1);
@@ -1091,16 +894,11 @@
             color: #999;
         }
 
-        .footer-heart {
-            color: #e74c3c;
-            font-size: 1.2rem;
-            animation: heartbeat 2s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .footer-bottom p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         /* Floating Elements */
@@ -1133,6 +931,7 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .modal-content {
@@ -1140,7 +939,7 @@
             border-radius: 25px;
             padding: 3rem;
             max-width: 600px;
-            width: 90%;
+            width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
@@ -1193,7 +992,7 @@
             right: -400px;
             top: 0;
             width: 400px;
-            max-width: 100%;
+            max-width: 90vw;
             height: 100vh;
             background: white;
             box-shadow: -5px 0 20px rgba(0,0,0,0.1);
@@ -1247,6 +1046,124 @@
             margin-bottom: 1rem;
         }
 
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: var(--shadow-md);
+                flex-direction: column;
+                padding: 1rem;
+                margin: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 3%;
+            }
+
+            .hero {
+                padding: 5rem 0 3rem;
+                min-height: auto;
+            }
+
+            .sketch-reality-container {
+                height: 300px;
+            }
+
+            .sketch-content, .reality-content {
+                font-size: 1.2rem;
+            }
+
+            nav {
+                padding: 0.8rem 0;
+                position: relative;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+            .nav-controls {
+                width: 100%;
+                justify-content: center;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                order: 2;
+            }
+
+            .control-select {
+                font-size: 11px;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .fixed-order-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+            }
+
+            .fixed-order-button .button-text {
+                font-size: 14px;
+            }
+
+            .fixed-order-button .button-subtext {
+                font-size: 10px;
+            }
+
+            .steps-timeline {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .step-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-placeholder h3 {
+                font-size: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 250px;
+                text-align: center;
+            }
+        }
+
         /* Loading Animation */
         .loader {
             position: fixed;
@@ -1295,6 +1212,7 @@
             transition: right 0.3s ease;
             z-index: 2000;
             border-left: 4px solid var(--primary-color);
+            max-width: 90vw;
         }
 
         .notification.show {
@@ -1322,103 +1240,6 @@
         .notification-close:hover {
             color: var(--text-dark);
         }
-
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                box-shadow: var(--shadow-md);
-                flex-direction: column;
-                padding: 1rem;
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .fixed-cta {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .fixed-cta-button {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 3%;
-            }
-
-            .hero {
-                padding: 5rem 0 3rem;
-            }
-
-            .sketch-reality-container {
-                height: 350px;
-            }
-
-            .steps-timeline {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 1rem;
-            }
-
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .cart {
-                width: 100%;
-            }
-
-            .cta-group {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-button {
-                width: 250px;
-                text-align: center;
-            }
-
-            .fixed-cta-text {
-                transform: translateX(-50%);
-                left: 50%;
-                width: max-content;
-                max-width: 200px;
-                white-space: normal;
-                text-align: center;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1427,18 +1248,16 @@
         <div class="loader-circle"></div>
     </div>
 
-    <!-- Fixed CTA Button -->
-    <div class="fixed-cta">
-        <button class="fixed-cta-button" onclick="openContactModal()" title="Оставить заявку">
-            💡
-        </button>
-        <div class="fixed-cta-text">поделитесь своей идеей прямо сейчас</div>
-    </div>
+    <!-- Fixed Order Button -->
+    <button class="fixed-order-button" onclick="showOrderForm()">
+        <span class="button-text" data-lang-key="fixedOrderButton">Оставить заявку</span>
+        <span class="button-subtext" data-lang-key="fixedOrderSubtext">поделитесь своей идеей прямо сейчас</span>
+    </button>
 
     <!-- Notification -->
     <div class="notification" id="notification">
         <span class="notification-icon">✓</span>
-        <span class="notification-text">Услуга добавлена в корзину</span>
+        <span class="notification-text" data-lang-key="notificationText">Услуга добавлена в корзину</span>
         <button class="notification-close" onclick="hideNotification()">×</button>
     </div>
 
@@ -1448,26 +1267,18 @@
             <nav>
                 <div class="logo">Creative.Partner</div>
                 
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link" data-lang-key="nav.home">Главная</a></li>
-                    <li><a href="#services" class="nav-link" data-lang-key="nav.services">Услуги</a></li>
-                    <li><a href="#portfolio" class="nav-link" data-lang-key="nav.portfolio">Портфолио</a></li>
-                    <li><a href="#about" class="nav-link" data-lang-key="nav.about">О нас</a></li>
-                    <li><a href="#contact" class="nav-link" data-lang-key="nav.contact">Контакты</a></li>
-                </ul>
-
                 <div class="nav-controls">
-                    <select class="control-select" id="langSwitch" onchange="switchLanguage(this.value)">
+                    <select class="control-select" id="langSwitch" onchange="changeLanguage(this.value)">
                         <option value="ru">RU</option>
                         <option value="en">EN</option>
                         <option value="ge">GE</option>
                     </select>
-                    <select class="control-select" id="currencySwitch" onchange="switchCurrency(this.value)">
+                    <select class="control-select" id="currencySwitch" onchange="changeCurrency(this.value)">
                         <option value="usd">USD</option>
                         <option value="gel">GEL</option>
                     </select>
                     <button class="control-select" onclick="toggleCart()">
-                        <span data-lang-key="cart.title">Корзина</span> (<span id="cartCount">0</span>)
+                        <span data-lang-key="cart">Корзина</span> (<span id="cartCount">0</span>)
                     </button>
                     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                         <span></span>
@@ -1475,6 +1286,14 @@
                         <span></span>
                     </button>
                 </div>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link" data-lang-key="navHome">Главная</a></li>
+                    <li><a href="#services" class="nav-link" data-lang-key="navServices">Услуги</a></li>
+                    <li><a href="#portfolio" class="nav-link" data-lang-key="navPortfolio">Портфолио</a></li>
+                    <li><a href="#about" class="nav-link" data-lang-key="navAbout">О нас</a></li>
+                    <li><a href="#contact" class="nav-link" data-lang-key="navContact">Контакты</a></li>
+                </ul>
             </nav>
         </div>
     </header>
@@ -1488,23 +1307,23 @@
         
         <div class="container">
             <div class="hero-content">
-                <h1 data-lang-key="hero.title">От <span class="gradient-text">картинки</span> до <span class="gradient-text">вечеринки</span></h1>
-                <p class="tagline" data-lang-key="hero.tagline">Воплощаем мечты в реальность • Создаем истории, которые вдохновляют</p>
+                <h1><span data-lang-key="heroFrom">От</span> <span class="gradient-text" data-lang-key="heroPicture">картинки</span> <span data-lang-key="heroTo">до</span> <span class="gradient-text" data-lang-key="heroParty">вечеринки</span></h1>
+                <p class="tagline" data-lang-key="heroTagline">Воплощаем мечты в реальность • Создаем истории, которые вдохновляют</p>
                 
                 <div class="sketch-reality-wrapper">
-                    <div class="sketch-reality-container" id="sketchReality">
+                    <div class="sketch-reality-container" id="sketchReality" data-label="МЕЧТА → РЕАЛЬНОСТЬ">
                         <div class="sketch-side">
                             <div class="sketch-content">
-                                <p>💭 <span data-lang-key="sketch.title">Эскиз</span></p>
-                                <p data-lang-key="sketch.idea">Идея</p>
-                                <p data-lang-key="sketch.dream">Мечта</p>
+                                <p>💭 <span data-lang-key="sketch1">Эскиз</span></p>
+                                <p data-lang-key="sketch2">Идея</p>
+                                <p data-lang-key="sketch3">Мечта</p>
                             </div>
                         </div>
                         <div class="reality-side">
                             <div class="reality-content">
-                                <p>🎊 <span data-lang-key="reality.title">Реальность</span></p>
-                                <p data-lang-key="reality.implementation">Воплощение</p>
-                                <p data-lang-key="reality.celebration">Праздник</p>
+                                <p>🎊 <span data-lang-key="reality1">Реальность</span></p>
+                                <p data-lang-key="reality2">Воплощение</p>
+                                <p data-lang-key="reality3">Праздник</p>
                             </div>
                         </div>
                         <div class="slider-handle" id="sliderHandle"></div>
@@ -1512,8 +1331,8 @@
                 </div>
                 
                 <div class="cta-group">
-                    <a href="#services" class="cta-button" data-lang-key="hero.order_service">Заказать услугу</a>
-                    <a href="#portfolio" class="cta-button cta-button-outline" data-lang-key="hero.view_portfolio">Смотреть портфолио</a>
+                    <a href="#services" class="cta-button" data-lang-key="ctaOrder">Заказать услугу</a>
+                    <a href="#portfolio" class="cta-button cta-button-outline" data-lang-key="ctaPortfolio">Смотреть портфолио</a>
                 </div>
             </div>
         </div>
@@ -1522,39 +1341,39 @@
     <!-- Services Steps Section -->
     <section class="services-steps" id="steps">
         <div class="container">
-            <h2 class="section-title" data-lang-key="steps.title">5 шагов к <span class="gradient-text">идеальному событию</span></h2>
-            <p class="section-subtitle" data-lang-key="steps.subtitle">Комплексный подход от идеи до реализации</p>
+            <h2 class="section-title"><span data-lang-key="stepsTitle1">5 шагов к</span> <span class="gradient-text" data-lang-key="stepsTitle2">идеальному событию</span></h2>
+            <p class="section-subtitle" data-lang-key="stepsSubtitle">Комплексный подход от идеи до реализации</p>
             
             <div class="steps-timeline">
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <div class="step-icon">📋</div>
-                    <h3 class="step-title" data-lang-key="steps.step1.title">Афиша и приглашения</h3>
-                    <p class="step-description" data-lang-key="steps.step1.description">Создаем первое впечатление и задаем тон вашему событию</p>
+                    <h3 class="step-title" data-lang-key="step1Title">Афиша и приглашения</h3>
+                    <p class="step-description" data-lang-key="step1Desc">Создаем первое впечатление и задаем тон вашему событию</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
                     <div class="step-icon">🎮</div>
-                    <h3 class="step-title" data-lang-key="steps.step2.title">Развлечения и активности</h3>
-                    <p class="step-description" data-lang-key="steps.step2.description">Наполняем программу яркими эмоциями и незабываемыми моментами</p>
+                    <h3 class="step-title" data-lang-key="step2Title">Развлечения и активности</h3>
+                    <p class="step-description" data-lang-key="step2Desc">Наполняем программу яркими эмоциями и незабываемыми моментами</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <div class="step-icon">🎨</div>
-                    <h3 class="step-title" data-lang-key="steps.step3.title">Визуальное оформление</h3>
-                    <p class="step-description" data-lang-key="steps.step3.description">Создаем уникальную атмосферу с помощью декора и реквизита</p>
+                    <h3 class="step-title" data-lang-key="step3Title">Визуальное оформление</h3>
+                    <p class="step-description" data-lang-key="step3Desc">Создаем уникальную атмосферу с помощью декора и реквизита</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">4</div>
                     <div class="step-icon">🎵</div>
-                    <h3 class="step-title" data-lang-key="steps.step4.title">Звук и музыка</h3>
-                    <p class="step-description" data-lang-key="steps.step4.description">Оживляем пространство идеальным звуковым сопровождением</p>
+                    <h3 class="step-title" data-lang-key="step4Title">Звук и музыка</h3>
+                    <p class="step-description" data-lang-key="step4Desc">Оживляем пространство идеальным звуковым сопровождением</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">5</div>
                     <div class="step-icon">🎯</div>
-                    <h3 class="step-title" data-lang-key="steps.step5.title">Проведение события</h3>
-                    <p class="step-description" data-lang-key="steps.step5.description">Профессиональный менеджмент и безупречная координация</p>
+                    <h3 class="step-title" data-lang-key="step5Title">Проведение события</h3>
+                    <p class="step-description" data-lang-key="step5Desc">Профессиональный менеджмент и безупречная координация</p>
                 </div>
             </div>
         </div>
@@ -1563,270 +1382,15 @@
     <!-- Service Categories -->
     <section class="service-categories" id="services">
         <div class="container">
-            <h2 class="section-title" data-lang-key="services.main_title">Наши <span class="gradient-text">услуги</span></h2>
-            <p class="section-subtitle" data-lang-key="services.subtitle">Комплексные решения и отдельные услуги для вашего успеха</p>
+            <h2 class="section-title"><span data-lang-key="servicesTitle1">Наши</span> <span class="gradient-text" data-lang-key="servicesTitle2">услуги</span></h2>
+            <p class="section-subtitle" data-lang-key="servicesSubtitle">Комплексные решения и отдельные услуги для вашего успеха</p>
             
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon">🎪</div>
-                        <h3 class="category-title" data-lang-key="services.events.title">Организация мероприятий</h3>
-                        <p class="category-count" data-lang-key="services.events.count">12+ типов событий</p>
-                    </div>
-                    <div class="category-services">
-                        <ul class="service-list">
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.events.corporate">Корпоративы «под ключ»</span>
-                                <span class="service-price" data-price="800">от $800</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.events.kids">Детские праздники</span>
-                                <span class="service-price" data-price="150">от $150</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.events.weddings">Свадьбы и юбилеи</span>
-                                <span class="service-price" data-price="500">от $500</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.events.conferences">Бизнес-конференции</span>
-                                <span class="service-price" data-price="400">от $400</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon">🎨</div>
-                        <h3 class="category-title" data-lang-key="services.design.title">Визуальный дизайн</h3>
-                        <p class="category-count" data-lang-key="services.design.count">Дистанционно по всему миру</p>
-                    </div>
-                    <div class="category-services">
-                        <ul class="service-list">
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.design.logo">Логотип и айдентика</span>
-                                <span class="service-price" data-price="100">от $100</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.design.print">Дизайн полиграфии</span>
-                                <span class="service-price" data-price="50">от $50</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.design.3d">3D визуализация</span>
-                                <span class="service-price" data-price="200">от $200</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.design.web">Веб-дизайн</span>
-                                <span class="service-price" data-price="300">от $300</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon">🎬</div>
-                        <h3 class="category-title" data-lang-key="services.video.title">Видео-продакшн</h3>
-                        <p class="category-count" data-lang-key="services.video.count">От идеи до готового ролика</p>
-                    </div>
-                    <div class="category-services">
-                        <ul class="service-list">
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.video.presentation">Презентационные ролики</span>
-                                <span class="service-price" data-price="175">от $175</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.video.ads">Рекламные видео</span>
-                                <span class="service-price" data-price="250">от $250</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.video.animation">Анимация и моушн-дизайн</span>
-                                <span class="service-price" data-price="150">от $150</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.video.editing">Видеомонтаж</span>
-                                <span class="service-price" data-price="80">от $80</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon">🎤</div>
-                        <h3 class="category-title" data-lang-key="services.audio.title">Аудио и диктор</h3>
-                        <p class="category-count" data-lang-key="services.audio.count">Профессиональное озвучивание</p>
-                    </div>
-                    <div class="category-services">
-                        <ul class="service-list">
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.audio.voiceover">Озвучка рекламы</span>
-                                <span class="service-price" data-price="40">от $40</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.audio.dj">Event DJ (3-4 часа)</span>
-                                <span class="service-price" data-price="100">от $100</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.audio.branding">Аудио-брендинг</span>
-                                <span class="service-price" data-price="150">от $150</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.audio.podcasts">Подкасты и аудиокниги</span>
-                                <span class="service-price" data-price="60">от $60</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon">🎭</div>
-                        <h3 class="category-title" data-lang-key="services.entertainment.title">Развлечения</h3>
-                        <p class="category-count" data-lang-key="services.entertainment.count">Артисты и активности</p>
-                    </div>
-                    <div class="category-services">
-                        <ul class="service-list">
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.entertainment.hosts">Ведущие и аниматоры</span>
-                                <span class="service-price" data-price="120">от $120</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.entertainment.magicians">Фокусники и иллюзионисты</span>
-                                <span class="service-price" data-price="150">от $150</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.entertainment.bands">Музыкальные группы</span>
-                                <span class="service-price" data-price="300">от $300</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.entertainment.interactive">Интерактивные зоны</span>
-                                <span class="service-price" data-price="200">от $200</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon">📱</div>
-                        <h3 class="category-title" data-lang-key="services.digital.title">Диджитал услуги</h3>
-                        <p class="category-count" data-lang-key="services.digital.count">Современные решения</p>
-                    </div>
-                    <div class="category-services">
-                        <ul class="service-list">
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.digital.smm">SMM и продвижение</span>
-                                <span class="service-price" data-price="200">от $200</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.digital.streaming">Онлайн-трансляции</span>
-                                <span class="service-price" data-price="300">от $300</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.digital.ar">AR/VR активации</span>
-                                <span class="service-price" data-price="400">от $400</span>
-                            </li>
-                            <li class="service-item">
-                                <span class="service-name" data-lang-key="services.digital.mobile">Мобильные приложения</span>
-                                <span class="service-price" data-price="500">от $500</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Individual Services Section -->
-    <section class="individual-services" id="individual-services">
-        <div class="container">
-            <h2 class="section-title" data-lang-key="individual_services.title">Выберите <span class="gradient-text">нужные услуги</span></h2>
-            <div class="services-disclaimer">
-                ⚠️ <span data-lang-key="pricing_disclaimer">Все цены являются ориентировочными и могут изменяться в зависимости от масштаба проекта, срочности, уникальных требований и рыночных условий</span>
-            </div>
+            <p class="price-disclaimer" data-lang-key="priceDisclaimer">
+                ⚠️ Все цены являются ориентировочными и могут изменяться в зависимости от масштаба проекта, срочности, уникальных требований и рыночных условий
+            </p>
             
-            <div class="services-grid">
-                <!-- Turnkey Service -->
-                <div class="service-card turnkey-service">
-                    <span class="turnkey-badge" data-lang-key="turnkey.badge">Под ключ</span>
-                    <h3 data-lang-key="turnkey.title">🎪 Комплексное решение</h3>
-                    <div class="service-price" data-lang-key="turnkey.price">Обсуждается индивидуально</div>
-                    <ul class="service-features">
-                        <li data-lang-key="turnkey.feature1">Полная организация мероприятия</li>
-                        <li data-lang-key="turnkey.feature2">Персональный менеджер проекта</li>
-                        <li data-lang-key="turnkey.feature3">Все услуги включены</li>
-                        <li data-lang-key="turnkey.feature4">Гарантия результата</li>
-                    </ul>
-                    <button class="add-to-cart-button" onclick="openTurnkeyModal()" data-lang-key="turnkey.button">Обсудить проект</button>
-                </div>
-
-                <!-- Individual Services -->
-                <div class="service-card">
-                    <h3>📋 <span data-lang-key="service.poster.title">Афиша/Приглашения</span></h3>
-                    <div class="service-price" data-price="50">от $50</div>
-                    <ul class="service-features">
-                        <li data-lang-key="service.poster.feature1">Уникальный дизайн</li>
-                        <li data-lang-key="service.poster.feature2">Адаптация под форматы</li>
-                        <li data-lang-key="service.poster.feature3">Готовность за 2-3 дня</li>
-                    </ul>
-                    <button class="add-to-cart-button" onclick="addToCart('Афиша/Приглашения', 50)" data-lang-key="add_to_cart">Добавить в корзину</button>
-                </div>
-
-                <div class="service-card">
-                    <h3>🎮 <span data-lang-key="service.entertainment.title">Развлекательная программа</span></h3>
-                    <div class="service-price" data-price="200">от $200</div>
-                    <ul class="service-features">
-                        <li data-lang-key="service.entertainment.feature1">Ведущий мероприятия</li>
-                        <li data-lang-key="service.entertainment.feature2">Интерактивные игры</li>
-                        <li data-lang-key="service.entertainment.feature3">Сценарий программы</li>
-                    </ul>
-                    <button class="add-to-cart-button" onclick="addToCart('Развлекательная программа', 200)" data-lang-key="add_to_cart">Добавить в корзину</button>
-                </div>
-
-                <div class="service-card">
-                    <h3>🎨 <span data-lang-key="service.design.title">Визуальное оформление</span></h3>
-                    <div class="service-price" data-price="150">от $150</div>
-                    <ul class="service-features">
-                        <li data-lang-key="service.design.feature1">Декорации и реквизит</li>
-                        <li data-lang-key="service.design.feature2">Фотозона</li>
-                        <li data-lang-key="service.design.feature3">Тематическое оформление</li>
-                    </ul>
-                    <button class="add-to-cart-button" onclick="addToCart('Визуальное оформление', 150)" data-lang-key="add_to_cart">Добавить в корзину</button>
-                </div>
-
-                <div class="service-card">
-                    <h3>🎵 <span data-lang-key="service.sound.title">Звуковое сопровождение</span></h3>
-                    <div class="service-price" data-price="100">от $100</div>
-                    <ul class="service-features">
-                        <li data-lang-key="service.sound.feature1">DJ на мероприятие</li>
-                        <li data-lang-key="service.sound.feature2">Звуковая аппаратура</li>
-                        <li data-lang-key="service.sound.feature3">Микрофоны</li>
-                    </ul>
-                    <button class="add-to-cart-button" onclick="addToCart('Звуковое сопровождение', 100)" data-lang-key="add_to_cart">Добавить в корзину</button>
-                </div>
-
-                <div class="service-card">
-                    <h3>🎯 <span data-lang-key="service.management.title">Менеджмент события</span></h3>
-                    <div class="service-price" data-price="120">от $120</div>
-                    <ul class="service-features">
-                        <li data-lang-key="service.management.feature1">Координация в день события</li>
-                        <li data-lang-key="service.management.feature2">Контроль тайминга</li>
-                        <li data-lang-key="service.management.feature3">Решение вопросов</li>
-                    </ul>
-                    <button class="add-to-cart-button" onclick="addToCart('Менеджмент события', 120)" data-lang-key="add_to_cart">Добавить в корзину</button>
-                </div>
-
-                <div class="service-card">
-                    <h3>🎬 <span data-lang-key="service.video.title">Видеопродакшн</span></h3>
-                    <div class="service-price" data-price="175">от $175</div>
-                    <ul class="service-features">
-                        <li data-lang-key="service.video.feature1">Презентационный ролик</li>
-                        <li data-lang-key="service.video.feature2">Монтаж и обработка</li>
-                        <li data-lang-key="service.video.feature3">Готовность за 5-7 дней</li>
-                    </ul>
-                    <button class="add-to-cart-button" onclick="addToCart('Видеопродакшн', 175)" data-lang-key="add_to_cart">Добавить в корзину</button>
-                </div>
+            <div class="categories-grid" id="servicesGrid">
+                <!-- Services will be populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -1834,43 +1398,13 @@
     <!-- Portfolio Section -->
     <section class="portfolio-section" id="portfolio">
         <div class="container">
-            <h2 class="section-title" data-lang-key="portfolio.title">Наше <span class="gradient-text">портфолио</span></h2>
-            <p class="section-subtitle" data-lang-key="portfolio.subtitle">Истории, которые вдохновляют и удивляют</p>
+            <h2 class="section-title"><span data-lang-key="portfolioTitle1">Наше</span> <span class="gradient-text" data-lang-key="portfolioTitle2">портфолио</span></h2>
+            <p class="section-subtitle" data-lang-key="portfolioSubtitle">Истории, которые вдохновляют и удивляют</p>
             
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-lang-key="portfolio.filter.all">Все проекты</button>
-                <button class="filter-btn" data-lang-key="portfolio.filter.events">Мероприятия</button>
-                <button class="filter-btn" data-lang-key="portfolio.filter.design">Дизайн</button>
-                <button class="filter-btn" data-lang-key="portfolio.filter.video">Видео</button>
-                <button class="filter-btn" data-lang-key="portfolio.filter.digital">Digital</button>
-            </div>
-            
-            <!-- Portfolio Grid - Container for future projects -->
-            <div class="portfolio-grid" id="portfolioGrid">
-                <!-- Example portfolio items - replace with actual content -->
-                <div class="portfolio-item" data-category="events">
-                    <div class="portfolio-image-container">
-                        <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🎭</div>
-                    </div>
-                    <div class="portfolio-content">
-                        <p class="portfolio-category" data-lang-key="portfolio.example1.category">Корпоративное мероприятие</p>
-                        <h3 class="portfolio-title" data-lang-key="portfolio.example1.title">Конференция TechFuture 2024</h3>
-                        <p class="portfolio-description" data-lang-key="portfolio.example1.description">Организация международной конференции для 500+ участников с онлайн-трансляцией</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="design">
-                    <div class="portfolio-image-container">
-                        <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🎨</div>
-                    </div>
-                    <div class="portfolio-content">
-                        <p class="portfolio-category" data-lang-key="portfolio.example2.category">Брендинг</p>
-                        <h3 class="portfolio-title" data-lang-key="portfolio.example2.title">Ребрендинг сети кафе "Утюг"</h3>
-                        <p class="portfolio-description" data-lang-key="portfolio.example2.description">Полный комплекс работ: от логотипа до дизайна интерьера</p>
-                    </div>
-                </div>
-
-                <!-- More portfolio items can be added here -->
+            <div class="portfolio-placeholder">
+                <div class="emoji">🎭</div>
+                <h3 data-lang-key="portfolioPlaceholder">Здесь может быть ваше событие!</h3>
+                <p data-lang-key="portfolioPlaceholderDesc">Скоро здесь появятся наши лучшие работы, а пока представьте, как ваш проект станет частью нашего портфолио успешных историй.</p>
             </div>
         </div>
     </section>
@@ -1878,12 +1412,12 @@
     <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="container">
-            <h2 class="section-title" data-lang-key="contact.title">Свяжитесь с <span class="gradient-text">нами</span></h2>
+            <h2 class="section-title"><span data-lang-key="contactTitle1">Свяжитесь с</span> <span class="gradient-text" data-lang-key="contactTitle2">нами</span></h2>
             
             <div class="contact-container">
                 <div class="contact-info">
-                    <h3 data-lang-key="contact.subtitle">Давайте создадим что-то удивительное вместе!</h3>
-                    <p data-lang-key="contact.description">
+                    <h3 data-lang-key="contactHeading">Давайте создадим что-то удивительное вместе!</h3>
+                    <p data-lang-key="contactDescription">
                         Creative.Partner - ваш надежный партнер в создании незабываемых событий и креативных проектов. 
                         Мы работаем как локально в Грузии, так и дистанционно по всему миру.
                     </p>
@@ -1891,55 +1425,55 @@
                     <ul class="contact-details">
                         <li>
                             <span class="contact-icon">📍</span>
-                            <span data-lang-key="contact.location">Тбилиси, Грузия</span>
+                            <span data-lang-key="contactLocation">Тбилиси, Грузия</span>
                         </li>
                         <li>
                             <span class="contact-icon">📧</span>
-                            <span>dondigidonkarton@gmail.com</span>
+                            <a href="mailto:dondigidonkarton@gmail.com">dondigidonkarton@gmail.com</a>
                         </li>
                         <li>
                             <span class="contact-icon">📞</span>
-                            <span>+995 577 258 874</span>
+                            <a href="https://t.me/CMblCVbl">Telegram</a>
                         </li>
                         <li>
                             <span class="contact-icon">🕒</span>
-                            <span data-lang-key="contact.hours">Пн-Пт: 10:00 - 19:00</span>
+                            <span data-lang-key="contactHours">Пн-Пт: 10:00 - 19:00</span>
                         </li>
                     </ul>
                     
                     <div class="social-links">
-                        <a href="#" class="social-link" title="Instagram">📷</a>
-                        <a href="#" class="social-link" title="Telegram">💬</a>
-                        <a href="#" class="social-link" title="TikTok">🎵</a>
-                        <a href="#" class="social-link" title="YouTube">📹</a>
+                        <a href="https://www.instagram.com/he.cekpet?igsh=bjFvcWgzYnQzdHk1" class="social-link" target="_blank">📷</a>
+                        <a href="https://t.me/CMblCVbl" class="social-link" target="_blank">💬</a>
+                        <a href="https://t.me/MultCreaPart" class="social-link" target="_blank">📢</a>
+                        <a href="https://www.youtube.com/channel/UCEp0MvS_-_oNoZYdvVKkDQQ" class="social-link" target="_blank">📹</a>
                     </div>
                 </div>
                 
                 <form class="contact-form social-frame" id="contactForm">
                     <div class="form-group">
-                        <label class="form-label" data-lang-key="contact.form.name">Ваше имя</label>
-                        <input type="text" class="form-input" data-lang-key="contact.form.name_placeholder" placeholder="Как к вам обращаться?" required>
+                        <label class="form-label" data-lang-key="formName">Ваше имя</label>
+                        <input type="text" class="form-input" name="name" placeholder="Как к вам обращаться?" data-lang-key="formNamePlaceholder" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-lang-key="contact.form.contact">Email или телефон</label>
-                        <input type="text" class="form-input" data-lang-key="contact.form.contact_placeholder" placeholder="Как с вами связаться?" required>
+                        <label class="form-label" data-lang-key="formContact">Email или телефон</label>
+                        <input type="text" class="form-input" name="contact" placeholder="Как с вами связаться?" data-lang-key="formContactPlaceholder" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-lang-key="contact.form.service_type">Тип услуги</label>
-                        <select class="form-select" required>
-                            <option value="" data-lang-key="contact.form.select_service">Выберите услугу</option>
-                            <option value="event" data-lang-key="contact.form.event_organization">Организация мероприятия</option>
-                            <option value="design" data-lang-key="contact.form.design_branding">Дизайн и брендинг</option>
-                            <option value="video" data-lang-key="contact.form.video_production">Видеопродакшн</option>
-                            <option value="complex" data-lang-key="contact.form.complex_solution">Комплексное решение</option>
-                            <option value="other" data-lang-key="contact.form.other">Другое</option>
+                        <label class="form-label" data-lang-key="formService">Тип услуги</label>
+                        <select class="form-input" name="service" required>
+                            <option value="" data-lang-key="formServiceSelect">Выберите услугу</option>
+                            <option value="event" data-lang-key="formServiceEvent">Организация мероприятия</option>
+                            <option value="design" data-lang-key="formServiceDesign">Дизайн и брендинг</option>
+                            <option value="video" data-lang-key="formServiceVideo">Видеопродакшн</option>
+                            <option value="complex" data-lang-key="formServiceComplex">Комплексное решение</option>
+                            <option value="other" data-lang-key="formServiceOther">Другое</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" data-lang-key="contact.form.project_description">Расскажите о проекте</label>
-                        <textarea class="form-textarea" data-lang-key="contact.form.project_placeholder" placeholder="Опишите вашу идею или задачу..." required></textarea>
+                        <label class="form-label" data-lang-key="formMessage">Расскажите о проекте</label>
+                        <textarea class="form-textarea" name="message" placeholder="Опишите вашу идею или задачу..." data-lang-key="formMessagePlaceholder"></textarea>
                     </div>
-                    <button type="submit" class="form-submit" data-lang-key="contact.form.submit">Отправить заявку</button>
+                    <button type="submit" class="form-submit" data-lang-key="formSubmit">Отправить заявку</button>
                 </form>
             </div>
         </div>
@@ -1951,42 +1485,41 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Creative.Partner</h4>
-                    <p style="color: #ccc; margin-top: 1rem;" data-lang-key="footer.tagline">
+                    <p style="color: #ccc; margin-top: 1rem;" data-lang-key="footerTagline">
                         Воплощаем мечты в реальность.<br>
                         От картинки до вечеринки.
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h4 data-lang-key="footer.services">Услуги</h4>
+                    <h4 data-lang-key="footerServices">Услуги</h4>
                     <ul>
-                        <li><a href="#services" data-lang-key="footer.event_organization">Организация мероприятий</a></li>
-                        <li><a href="#services" data-lang-key="footer.design_branding">Дизайн и брендинг</a></li>
-                        <li><a href="#services" data-lang-key="footer.video_production">Видеопродакшн</a></li>
-                        <li><a href="#services" data-lang-key="footer.audio_voiceover">Аудио и озвучка</a></li>
+                        <li><a href="#services" data-lang-key="footerServiceEvents">Организация мероприятий</a></li>
+                        <li><a href="#services" data-lang-key="footerServiceDesign">Дизайн и брендинг</a></li>
+                        <li><a href="#services" data-lang-key="footerServiceVideo">Видеопродакшн</a></li>
+                        <li><a href="#services" data-lang-key="footerServiceAudio">Аудио и озвучка</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4 data-lang-key="footer.company">Компания</h4>
+                    <h4 data-lang-key="footerCompany">Компания</h4>
                     <ul>
-                        <li><a href="#about" data-lang-key="footer.about">О нас</a></li>
-                        <li><a href="#portfolio" data-lang-key="footer.portfolio">Портфолио</a></li>
-                        <li><a href="#individual-services" data-lang-key="footer.pricing">Цены</a></li>
-                        <li><a href="#contact" data-lang-key="footer.contacts">Контакты</a></li>
+                        <li><a href="#about" data-lang-key="footerAbout">О нас</a></li>
+                        <li><a href="#portfolio" data-lang-key="footerPortfolio">Портфолио</a></li>
+                        <li><a href="#services" data-lang-key="footerPrices">Цены</a></li>
+                        <li><a href="#contact" data-lang-key="footerContact">Контакты</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4 data-lang-key="footer.follow_us">Следите за нами</h4>
+                    <h4 data-lang-key="footerFollow">Следите за нами</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Telegram</a></li>
-                        <li><a href="#">YouTube</a></li>
-                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/he.cekpet?igsh=bjFvcWgzYnQzdHk1" target="_blank">Instagram</a></li>
+                        <li><a href="https://t.me/MultCreaPart" target="_blank">Telegram</a></li>
+                        <li><a href="https://www.youtube.com/channel/UCEp0MvS_-_oNoZYdvVKkDQQ" target="_blank">YouTube</a></li>
+                        <li><a href="mailto:dondigidonkarton@gmail.com">Email</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Creative.Partner. <span data-lang-key="footer.rights">Все права защищены</span>.</p>
-                <p style="margin-top: 0.5rem;">With <span class="footer-heart">❤️</span> for You!</p>
+                <p>© 2024 Creative.Partner. <span data-lang-key="footerRights">Все права защищены.</span> With <span style="color: #e74c3c;">❤️</span> for You!</p>
             </div>
         </div>
     </footer>
@@ -1994,18 +1527,18 @@
     <!-- Cart Sidebar -->
     <div class="cart" id="cart">
         <div class="cart-header">
-            <h3 data-lang-key="cart.title">Корзина</h3>
+            <h3 data-lang-key="cartTitle">Корзина</h3>
             <button onclick="toggleCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
         </div>
         <div class="cart-items" id="cartItems">
-            <p style="text-align: center; color: #999;" data-lang-key="cart.empty">Корзина пуста</p>
+            <p style="text-align: center; color: #999;" data-lang-key="cartEmpty">Корзина пуста</p>
         </div>
         <div class="cart-footer">
             <div class="cart-total">
-                <span data-lang-key="cart.total">Итого:</span>
+                <span data-lang-key="cartTotal">Итого:</span>
                 <span id="cartTotal">$0</span>
             </div>
-            <button class="add-to-cart-button" onclick="checkout()" data-lang-key="cart.checkout">Оформить заказ</button>
+            <button class="form-submit" onclick="checkout()" data-lang-key="cartCheckout">Оформить заказ</button>
         </div>
     </div>
 
@@ -2013,577 +1546,965 @@
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
-            <h3 data-lang-key="modal.order.title">Оформление заказа</h3>
-            <form style="margin-top: 2rem;" id="orderForm">
+            <h3 data-lang-key="modalTitle">Оформление заказа</h3>
+            <form id="orderForm" style="margin-top: 2rem;">
                 <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.order.name">Ваше имя</label>
-                    <input type="text" class="form-input" required>
+                    <label class="form-label" data-lang-key="modalName">Ваше имя</label>
+                    <input type="text" class="form-input" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.order.phone">Контактный телефон</label>
-                    <input type="tel" class="form-input" required>
+                    <label class="form-label" data-lang-key="modalPhone">Контактный телефон</label>
+                    <input type="tel" class="form-input" name="phone" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-input" required>
+                    <input type="email" class="form-input" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.order.comment">Комментарий к заказу</label>
-                    <textarea class="form-textarea"></textarea>
+                    <label class="form-label" data-lang-key="modalComment">Комментарий к заказу</label>
+                    <textarea class="form-textarea" name="comment"></textarea>
                 </div>
-                <button type="submit" class="form-submit" data-lang-key="modal.order.submit">Отправить заказ</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Turnkey Modal -->
-    <div class="modal" id="turnkeyModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeTurnkeyModal()">×</button>
-            <h3 data-lang-key="modal.turnkey.title">Комплексное решение "под ключ"</h3>
-            <p style="margin-bottom: 2rem;" data-lang-key="modal.turnkey.description">
-                Расскажите нам о своем мероприятии, и мы предложим индивидуальное решение с полным сопровождением проекта.
-            </p>
-            <form id="turnkeyForm">
-                <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.turnkey.event_type">Тип мероприятия</label>
-                    <select class="form-select" required>
-                        <option value="" data-lang-key="modal.turnkey.select_type">Выберите тип</option>
-                        <option value="corporate" data-lang-key="modal.turnkey.corporate">Корпоративное мероприятие</option>
-                        <option value="wedding" data-lang-key="modal.turnkey.wedding">Свадьба</option>
-                        <option value="birthday" data-lang-key="modal.turnkey.birthday">День рождения</option>
-                        <option value="conference" data-lang-key="modal.turnkey.conference">Конференция</option>
-                        <option value="other" data-lang-key="modal.turnkey.other">Другое</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.turnkey.guests">Количество гостей</label>
-                    <input type="number" class="form-input" min="1" placeholder="50" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.turnkey.budget">Примерный бюджет</label>
-                    <select class="form-select">
-                        <option value="" data-lang-key="modal.turnkey.select_budget">Выберите диапазон</option>
-                        <option value="500-1000">$500 - $1,000</option>
-                        <option value="1000-3000">$1,000 - $3,000</option>
-                        <option value="3000-5000">$3,000 - $5,000</option>
-                        <option value="5000+">$5,000+</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.turnkey.name">Ваше имя</label>
-                    <input type="text" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.turnkey.contact">Контакт</label>
-                    <input type="text" class="form-input" placeholder="Телефон или Email" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-lang-key="modal.turnkey.details">Детали и пожелания</label>
-                    <textarea class="form-textarea" data-lang-key="modal.turnkey.details_placeholder" placeholder="Опишите ваше видение мероприятия..."></textarea>
-                </div>
-                <button type="submit" class="form-submit" data-lang-key="modal.turnkey.submit">Отправить заявку</button>
+                <button type="submit" class="form-submit" data-lang-key="modalSubmit">Отправить заказ</button>
             </form>
         </div>
     </div>
 
     <script>
+        // Global variables
+        let cart = [];
+        let currentLang = 'ru';
+        let currentCurrency = 'usd';
+        const exchangeRate = 2.7;
+
         // Language translations
         const translations = {
             ru: {
                 // Navigation
-                'nav.home': 'Главная',
-                'nav.services': 'Услуги',
-                'nav.portfolio': 'Портфолио',
-                'nav.about': 'О нас',
-                'nav.contact': 'Контакты',
+                navHome: 'Главная',
+                navServices: 'Услуги',
+                navPortfolio: 'Портфолио',
+                navAbout: 'О нас',
+                navContact: 'Контакты',
+                cart: 'Корзина',
                 
-                // Cart
-                'cart.title': 'Корзина',
-                'cart.empty': 'Корзина пуста',
-                'cart.total': 'Итого:',
-                'cart.checkout': 'Оформить заказ',
+                // Hero
+                heroFrom: 'От',
+                heroPicture: 'картинки',
+                heroTo: 'до',
+                heroParty: 'вечеринки',
+                heroTagline: 'Воплощаем мечты в реальность • Создаем истории, которые вдохновляют',
+                sketch1: 'Эскиз',
+                sketch2: 'Идея',
+                sketch3: 'Мечта',
+                reality1: 'Реальность',
+                reality2: 'Воплощение',
+                reality3: 'Праздник',
+                dreamToReality: 'МЕЧТА → РЕАЛЬНОСТЬ',
+                ctaOrder: 'Заказать услугу',
+                ctaPortfolio: 'Смотреть портфолио',
                 
-                // Hero section
-                'hero.title': 'От <span class="gradient-text">картинки</span> до <span class="gradient-text">вечеринки</span>',
-                'hero.tagline': 'Воплощаем мечты в реальность • Создаем истории, которые вдохновляют',
-                'hero.order_service': 'Заказать услугу',
-                'hero.view_portfolio': 'Смотреть портфолио',
-                
-                // Sketch/Reality
-                'sketch.title': 'Эскиз',
-                'sketch.idea': 'Идея',
-                'sketch.dream': 'Мечта',
-                'reality.title': 'Реальность',
-                'reality.implementation': 'Воплощение',
-                'reality.celebration': 'Праздник',
+                // Fixed button
+                fixedOrderButton: 'Оставить заявку',
+                fixedOrderSubtext: 'поделитесь своей идеей прямо сейчас',
                 
                 // Steps
-                'steps.title': '5 шагов к <span class="gradient-text">идеальному событию</span>',
-                'steps.subtitle': 'Комплексный подход от идеи до реализации',
-                'steps.step1.title': 'Афиша и приглашения',
-                'steps.step1.description': 'Создаем первое впечатление и задаем тон вашему событию',
-                'steps.step2.title': 'Развлечения и активности',
-                'steps.step2.description': 'Наполняем программу яркими эмоциями и незабываемыми моментами',
-                'steps.step3.title': 'Визуальное оформление',
-                'steps.step3.description': 'Создаем уникальную атмосферу с помощью декора и реквизита',
-                'steps.step4.title': 'Звук и музыка',
-                'steps.step4.description': 'Оживляем пространство идеальным звуковым сопровождением',
-                'steps.step5.title': 'Проведение события',
-                'steps.step5.description': 'Профессиональный менеджмент и безупречная координация',
+                stepsTitle1: '5 шагов к',
+                stepsTitle2: 'идеальному событию',
+                stepsSubtitle: 'Комплексный подход от идеи до реализации',
+                step1Title: 'Афиша и приглашения',
+                step1Desc: 'Создаем первое впечатление и задаем тон вашему событию',
+                step2Title: 'Развлечения и активности',
+                step2Desc: 'Наполняем программу яркими эмоциями и незабываемыми моментами',
+                step3Title: 'Визуальное оформление',
+                step3Desc: 'Создаем уникальную атмосферу с помощью декора и реквизита',
+                step4Title: 'Звук и музыка',
+                step4Desc: 'Оживляем пространство идеальным звуковым сопровождением',
+                step5Title: 'Проведение события',
+                step5Desc: 'Профессиональный менеджмент и безупречная координация',
                 
                 // Services
-                'services.main_title': 'Наши <span class="gradient-text">услуги</span>',
-                'services.subtitle': 'Комплексные решения и отдельные услуги для вашего успеха',
+                servicesTitle1: 'Наши',
+                servicesTitle2: 'услуги',
+                servicesSubtitle: 'Комплексные решения и отдельные услуги для вашего успеха',
+                priceDisclaimer: '⚠️ Все цены являются ориентировочными и могут изменяться в зависимости от масштаба проекта, срочности, уникальных требований и рыночных условий',
+                priceFrom: 'от',
+                
+                // Service categories
+                eventOrganization: 'Организация мероприятий',
+                moreEventTypes: '12+ типов событий',
+                corporateTurnkey: 'Корпоративы «под ключ»',
+                childrenParties: 'Детские праздники',
+                weddingsAnniversaries: 'Свадьбы и юбилеи',
+                businessConferences: 'Бизнес-конференции',
+                
+                visualDesign: 'Визуальный дизайн',
+                remoteWorldwide: 'Дистанционно по всему миру',
+                logoIdentity: 'Логотип и айдентика',
+                printDesign: 'Дизайн полиграфии',
+                visualization3D: '3D визуализация',
+                webDesign: 'Веб-дизайн',
+                
+                videoProduction: 'Видео-продакшн',
+                ideaToVideo: 'От идеи до готового ролика',
+                presentationVideos: 'Презентационные ролики',
+                commercialVideos: 'Рекламные видео',
+                animationMotion: 'Анимация и моушн-дизайн',
+                videoEditing: 'Видеомонтаж',
+                
+                audioVoice: 'Аудио и диктор',
+                professionalVoiceover: 'Профессиональное озвучивание',
+                commercialVoiceover: 'Озвучка рекламы',
+                eventDJ: 'Event DJ (3-4 часа)',
+                audioBranding: 'Аудио-брендинг',
+                podcastsAudiobooks: 'Подкасты и аудиокниги',
+                
+                entertainment: 'Развлечения',
+                artistsActivities: 'Артисты и активности',
+                hostsAnimators: 'Ведущие и аниматоры',
+                magiciansIllusionists: 'Фокусники и иллюзионисты',
+                musicalGroups: 'Музыкальные группы',
+                interactiveZones: 'Интерактивные зоны',
+                
+                digitalServices: 'Диджитал услуги',
+                modernSolutions: 'Современные решения',
+                smmPromotion: 'SMM и продвижение',
+                onlineStreaming: 'Онлайн-трансляции',
+                arvrActivations: 'AR/VR активации',
+                mobileApps: 'Мобильные приложения',
+                
+                // Turnkey
+                turnkeyPackage: 'Пакет «под ключ»',
+                discussDetails: 'Обсуждение деталей',
+                fullService: 'Полное сопровождение от идеи до реализации',
+                negotiable: 'Договорная',
+                
+                // Portfolio
+                portfolioTitle1: 'Наше',
+                portfolioTitle2: 'портфолио',
+                portfolioSubtitle: 'Истории, которые вдохновляют и удивляют',
+                portfolioPlaceholder: 'Здесь может быть ваше событие!',
+                portfolioPlaceholderDesc: 'Скоро здесь появятся наши лучшие работы, а пока представьте, как ваш проект станет частью нашего портфолио успешных историй.',
                 
                 // Contact
-                'contact.title': 'Свяжитесь с <span class="gradient-text">нами</span>',
-                'contact.subtitle': 'Давайте создадим что-то удивительное вместе!',
-                'contact.description': 'Creative.Partner - ваш надежный партнер в создании незабываемых событий и креативных проектов. Мы работаем как локально в Грузии, так и дистанционно по всему миру.',
-                'contact.location': 'Тбилиси, Грузия',
-                'contact.hours': 'Пн-Пт: 10:00 - 19:00',
+                contactTitle1: 'Свяжитесь с',
+                contactTitle2: 'нами',
+                contactHeading: 'Давайте создадим что-то удивительное вместе!',
+                contactDescription: 'Creative.Partner - ваш надежный партнер в создании незабываемых событий и креативных проектов. Мы работаем как локально в Грузии, так и дистанционно по всему миру.',
+                contactLocation: 'Тбилиси, Грузия',
+                contactHours: 'Пн-Пт: 10:00 - 19:00',
+                
+                // Form
+                formName: 'Ваше имя',
+                formNamePlaceholder: 'Как к вам обращаться?',
+                formContact: 'Email или телефон',
+                formContactPlaceholder: 'Как с вами связаться?',
+                formService: 'Тип услуги',
+                formServiceSelect: 'Выберите услугу',
+                formServiceEvent: 'Организация мероприятия',
+                formServiceDesign: 'Дизайн и брендинг',
+                formServiceVideo: 'Видеопродакшн',
+                formServiceComplex: 'Комплексное решение',
+                formServiceOther: 'Другое',
+                formMessage: 'Расскажите о проекте',
+                formMessagePlaceholder: 'Опишите вашу идею или задачу...',
+                formSubmit: 'Отправить заявку',
                 
                 // Footer
-                'footer.tagline': 'Воплощаем мечты в реальность.<br>От картинки до вечеринки.',
-                'footer.rights': 'Все права защищены',
+                footerTagline: 'Воплощаем мечты в реальность.<br>От картинки до вечеринки.',
+                footerServices: 'Услуги',
+                footerServiceEvents: 'Организация мероприятий',
+                footerServiceDesign: 'Дизайн и брендинг',
+                footerServiceVideo: 'Видеопродакшн',
+                footerServiceAudio: 'Аудио и озвучка',
+                footerCompany: 'Компания',
+                footerAbout: 'О нас',
+                footerPortfolio: 'Портфолио',
+                footerPrices: 'Цены',
+                footerContact: 'Контакты',
+                footerFollow: 'Следите за нами',
+                footerRights: 'Все права защищены.',
                 
-                // Common
-                'pricing_disclaimer': 'Все цены являются ориентировочными и могут изменяться в зависимости от масштаба проекта, срочности, уникальных требований и рыночных условий',
-                'add_to_cart': 'Добавить в корзину',
-                'individual_services.title': 'Выберите <span class="gradient-text">нужные услуги</span>',
+                // Cart & Modal
+                cartTitle: 'Корзина',
+                cartEmpty: 'Корзина пуста',
+                cartTotal: 'Итого:',
+                cartCheckout: 'Оформить заказ',
+                modalTitle: 'Оформление заказа',
+                modalName: 'Ваше имя',
+                modalPhone: 'Контактный телефон',
+                modalComment: 'Комментарий к заказу',
+                modalSubmit: 'Отправить заказ',
+                
+                // Notification
+                notificationText: 'Услуга добавлена в корзину',
+                notificationOrderSent: 'Заявка отправлена!',
             },
             en: {
                 // Navigation
-                'nav.home': 'Home',
-                'nav.services': 'Services',
-                'nav.portfolio': 'Portfolio',
-                'nav.about': 'About',
-                'nav.contact': 'Contact',
+                navHome: 'Home',
+                navServices: 'Services',
+                navPortfolio: 'Portfolio',
+                navAbout: 'About',
+                navContact: 'Contact',
+                cart: 'Cart',
                 
-                // Cart
-                'cart.title': 'Cart',
-                'cart.empty': 'Cart is empty',
-                'cart.total': 'Total:',
-                'cart.checkout': 'Checkout',
+                // Hero
+                heroFrom: 'From',
+                heroPicture: 'picture',
+                heroTo: 'to',
+                heroParty: 'party',
+                heroTagline: 'Turning dreams into reality • Creating inspiring stories',
+                sketch1: 'Sketch',
+                sketch2: 'Idea',
+                sketch3: 'Dream',
+                reality1: 'Reality',
+                reality2: 'Implementation',
+                reality3: 'Celebration',
+                dreamToReality: 'DREAM → REALITY',
+                ctaOrder: 'Order Service',
+                ctaPortfolio: 'View Portfolio',
                 
-                // Hero section
-                'hero.title': 'From <span class="gradient-text">sketch</span> to <span class="gradient-text">celebration</span>',
-                'hero.tagline': 'Making dreams come true • Creating stories that inspire',
-                'hero.order_service': 'Order Service',
-                'hero.view_portfolio': 'View Portfolio',
-                
-                // Sketch/Reality
-                'sketch.title': 'Sketch',
-                'sketch.idea': 'Idea',
-                'sketch.dream': 'Dream',
-                'reality.title': 'Reality',
-                'reality.implementation': 'Implementation',
-                'reality.celebration': 'Celebration',
+                // Fixed button
+                fixedOrderButton: 'Submit Request',
+                fixedOrderSubtext: 'share your idea right now',
                 
                 // Steps
-                'steps.title': '5 steps to <span class="gradient-text">perfect event</span>',
-                'steps.subtitle': 'Comprehensive approach from idea to implementation',
-                'steps.step1.title': 'Posters and invitations',
-                'steps.step1.description': 'Creating first impression and setting tone for your event',
-                'steps.step2.title': 'Entertainment and activities',
-                'steps.step2.description': 'Filling program with bright emotions and unforgettable moments',
-                'steps.step3.title': 'Visual design',
-                'steps.step3.description': 'Creating unique atmosphere with decor and props',
-                'steps.step4.title': 'Sound and music',
-                'steps.step4.description': 'Bringing space to life with perfect sound accompaniment',
-                'steps.step5.title': 'Event execution',
-                'steps.step5.description': 'Professional management and flawless coordination',
+                stepsTitle1: '5 steps to',
+                stepsTitle2: 'perfect event',
+                stepsSubtitle: 'Comprehensive approach from idea to implementation',
+                step1Title: 'Posters and invitations',
+                step1Desc: 'Creating first impression and setting the tone',
+                step2Title: 'Entertainment and activities',
+                step2Desc: 'Filling program with bright emotions',
+                step3Title: 'Visual design',
+                step3Desc: 'Creating unique atmosphere with decor',
+                step4Title: 'Sound and music',
+                step4Desc: 'Bringing space to life with perfect sound',
+                step5Title: 'Event management',
+                step5Desc: 'Professional management and coordination',
                 
                 // Services
-                'services.main_title': 'Our <span class="gradient-text">services</span>',
-                'services.subtitle': 'Comprehensive solutions and individual services for your success',
+                servicesTitle1: 'Our',
+                servicesTitle2: 'services',
+                servicesSubtitle: 'Comprehensive and individual solutions for your success',
+                priceDisclaimer: '⚠️ All prices are approximate and may vary depending on project scale, urgency, unique requirements and market conditions',
+                priceFrom: 'from',
+                
+                // Service categories
+                eventOrganization: 'Event Organization',
+                moreEventTypes: '12+ event types',
+                corporateTurnkey: 'Corporate events turnkey',
+                childrenParties: 'Children\'s parties',
+                weddingsAnniversaries: 'Weddings and anniversaries',
+                businessConferences: 'Business conferences',
+                
+                visualDesign: 'Visual Design',
+                remoteWorldwide: 'Remote worldwide',
+                logoIdentity: 'Logo and identity',
+                printDesign: 'Print design',
+                visualization3D: '3D visualization',
+                webDesign: 'Web design',
+                
+                videoProduction: 'Video Production',
+                ideaToVideo: 'From idea to finished video',
+                presentationVideos: 'Presentation videos',
+                commercialVideos: 'Commercial videos',
+                animationMotion: 'Animation and motion design',
+                videoEditing: 'Video editing',
+                
+                audioVoice: 'Audio and Voice',
+                professionalVoiceover: 'Professional voiceover',
+                commercialVoiceover: 'Commercial voiceover',
+                eventDJ: 'Event DJ (3-4 hours)',
+                audioBranding: 'Audio branding',
+                podcastsAudiobooks: 'Podcasts and audiobooks',
+                
+                entertainment: 'Entertainment',
+                artistsActivities: 'Artists and activities',
+                hostsAnimators: 'Hosts and animators',
+                magiciansIllusionists: 'Magicians and illusionists',
+                musicalGroups: 'Musical groups',
+                interactiveZones: 'Interactive zones',
+                
+                digitalServices: 'Digital Services',
+                modernSolutions: 'Modern solutions',
+                smmPromotion: 'SMM and promotion',
+                onlineStreaming: 'Online streaming',
+                arvrActivations: 'AR/VR activations',
+                mobileApps: 'Mobile applications',
+                
+                // Turnkey
+                turnkeyPackage: 'Turnkey Package',
+                discussDetails: 'Details discussion',
+                fullService: 'Full support from idea to implementation',
+                negotiable: 'Negotiable',
+                
+                // Portfolio
+                portfolioTitle1: 'Our',
+                portfolioTitle2: 'portfolio',
+                portfolioSubtitle: 'Stories that inspire and amaze',
+                portfolioPlaceholder: 'Your event can be here!',
+                portfolioPlaceholderDesc: 'Our best work will appear here soon, meanwhile imagine how your project will become part of our successful stories portfolio.',
                 
                 // Contact
-                'contact.title': 'Get in <span class="gradient-text">touch</span>',
-                'contact.subtitle': 'Let\'s create something amazing together!',
-                'contact.description': 'Creative.Partner - your reliable partner in creating unforgettable events and creative projects. We work both locally in Georgia and remotely worldwide.',
-                'contact.location': 'Tbilisi, Georgia',
-                'contact.hours': 'Mon-Fri: 10:00 - 19:00',
+                contactTitle1: 'Contact',
+                contactTitle2: 'us',
+                contactHeading: 'Let\'s create something amazing together!',
+                contactDescription: 'Creative.Partner - your reliable partner in creating unforgettable events and creative projects. We work both locally in Georgia and remotely worldwide.',
+                contactLocation: 'Tbilisi, Georgia',
+                contactHours: 'Mon-Fri: 10:00 - 19:00',
+                
+                // Form
+                formName: 'Your name',
+                formNamePlaceholder: 'How should we address you?',
+                formContact: 'Email or phone',
+                formContactPlaceholder: 'How can we contact you?',
+                formService: 'Service type',
+                formServiceSelect: 'Select service',
+                formServiceEvent: 'Event organization',
+                formServiceDesign: 'Design and branding',
+                formServiceVideo: 'Video production',
+                formServiceComplex: 'Complex solution',
+                formServiceOther: 'Other',
+                formMessage: 'Tell us about your project',
+                formMessagePlaceholder: 'Describe your idea or task...',
+                formSubmit: 'Submit request',
                 
                 // Footer
-                'footer.tagline': 'Making dreams come true.<br>From sketch to celebration.',
-                'footer.rights': 'All rights reserved',
+                footerTagline: 'Turning dreams into reality.<br>From picture to party.',
+                footerServices: 'Services',
+                footerServiceEvents: 'Event organization',
+                footerServiceDesign: 'Design and branding',
+                footerServiceVideo: 'Video production',
+                footerServiceAudio: 'Audio and voiceover',
+                footerCompany: 'Company',
+                footerAbout: 'About us',
+                footerPortfolio: 'Portfolio',
+                footerPrices: 'Prices',
+                footerContact: 'Contact',
+                footerFollow: 'Follow us',
+                footerRights: 'All rights reserved.',
                 
-                // Common
-                'pricing_disclaimer': 'All prices are indicative and may vary depending on project scale, urgency, unique requirements and market conditions',
-                'add_to_cart': 'Add to Cart',
-                'individual_services.title': 'Choose <span class="gradient-text">needed services</span>',
+                // Cart & Modal
+                cartTitle: 'Cart',
+                cartEmpty: 'Cart is empty',
+                cartTotal: 'Total:',
+                cartCheckout: 'Checkout',
+                modalTitle: 'Order checkout',
+                modalName: 'Your name',
+                modalPhone: 'Contact phone',
+                modalComment: 'Order comment',
+                modalSubmit: 'Submit order',
+                
+                // Notification
+                notificationText: 'Service added to cart',
+                notificationOrderSent: 'Request sent!',
             },
             ge: {
                 // Navigation
-                'nav.home': 'მთავარი',
-                'nav.services': 'სერვისები',
-                'nav.portfolio': 'პორტფოლიო',
-                'nav.about': 'ჩვენ შესახებ',
-                'nav.contact': 'კონტაქტი',
+                navHome: 'მთავარი',
+                navServices: 'სერვისები',
+                navPortfolio: 'პორტფოლიო',
+                navAbout: 'ჩვენს შესახებ',
+                navContact: 'კონტაქტი',
+                cart: 'კალათა',
                 
-                // Cart
-                'cart.title': 'კალათა',
-                'cart.empty': 'კალათა ცარიელია',
-                'cart.total': 'სულ:',
-                'cart.checkout': 'შეკვეთა',
+                // Hero
+                heroFrom: 'სურათიდან',
+                heroPicture: 'ნახატიდან',
+                heroTo: 'დღესასწაულამდე',
+                heroParty: 'წვეულებამდე',
+                heroTagline: 'ვაქცევთ ოცნებებს რეალობად • ვქმნით შთამაგონებელ ისტორიებს',
+                sketch1: 'ესკიზი',
+                sketch2: 'იდეა',
+                sketch3: 'ოცნება',
+                reality1: 'რეალობა',
+                reality2: 'განხორციელება',
+                reality3: 'დღესასწაული',
+                dreamToReality: 'ᲝᲪᲜᲔᲑᲐ → ᲠᲔᲐᲚᲝᲑᲐ',
+                ctaOrder: 'სერვისის შეკვეთა',
+                ctaPortfolio: 'პორტფოლიოს ნახვა',
                 
-                // Hero section
-                'hero.title': '<span class="gradient-text">ესკიზიდან</span> <span class="gradient-text">ზეიმამდე</span>',
-                'hero.tagline': 'ოცნებების განხორციელება • შთამაგონებელი ამბების შექმნა',
-                'hero.order_service': 'სერვისის შეკვეთა',
-                'hero.view_portfolio': 'პორტფოლიოს ნახვა',
-                
-                // Sketch/Reality
-                'sketch.title': 'ესკიზი',
-                'sketch.idea': 'იდეა',
-                'sketch.dream': 'ოცნება',
-                'reality.title': 'რეალობა',
-                'reality.implementation': 'განხორციელება',
-                'reality.celebration': 'ზეიმი',
+                // Fixed button
+                fixedOrderButton: 'განაცხადის გაგზავნა',
+                fixedOrderSubtext: 'გაგვიზიარეთ თქვენი იდეა ახლავე',
                 
                 // Steps
-                'steps.title': '5 ნაბიჯი <span class="gradient-text">იდეალურ ღონისძიებამდე</span>',
-                'steps.subtitle': 'კომპლექსური მიდგომა იდეიდან განხორციელებამდე',
-                'steps.step1.title': 'აფიშები და მოწვევები',
-                'steps.step1.description': 'პირველი შთაბეჭდილების შექმნა და თქვენი ღონისძიების ტონის დასახვა',
-                'steps.step2.title': 'გასართობი და აქტივობები',
-                'steps.step2.description': 'პროგრამის შევსება ნათელი ემოციებითა და დაუვიწყარი მომენტებით',
-                'steps.step3.title': 'ვიზუალური გაფორმება',
-                'steps.step3.description': 'უნიკალური ატმოსფეროს შექმნა დეკორითა და რეკვიზიტით',
-                'steps.step4.title': 'ხმა და მუსიკა',
-                'steps.step4.description': 'სივრცის გაცოცხლება სრულყოფილი ხმოვანი თანმხლებით',
-                'steps.step5.title': 'ღონისძიების ჩატარება',
-                'steps.step5.description': 'პროფესიონალური მენეჯმენტი და უმაღლესი კოორდინაცია',
+                stepsTitle1: '5 ნაბიჯი',
+                stepsTitle2: 'იდეალური ღონისძიებისკენ',
+                stepsSubtitle: 'კომპლექსური მიდგომა იდეიდან რეალიზაციამდე',
+                step1Title: 'აფიშა და მოსაწვევები',
+                step1Desc: 'ვქმნით პირველ შთაბეჭდილებას',
+                step2Title: 'გასართობი და აქტივობები',
+                step2Desc: 'ვავსებთ პროგრამას კაშკაშა ემოციებით',
+                step3Title: 'ვიზუალური გაფორმება',
+                step3Desc: 'ვქმნით უნიკალურ ატმოსფეროს',
+                step4Title: 'ხმა და მუსიკა',
+                step4Desc: 'ვაცოცხლებთ სივრცეს იდეალური ხმით',
+                step5Title: 'ღონისძიების ჩატარება',
+                step5Desc: 'პროფესიონალური მენეჯმენტი',
                 
                 // Services
-                'services.main_title': 'ჩვენი <span class="gradient-text">სერვისები</span>',
-                'services.subtitle': 'კომპლექსური გადაწყვეტები და ინდივიდუალური სერვისები თქვენი წარმატებისთვის',
+                servicesTitle1: 'ჩვენი',
+                servicesTitle2: 'სერვისები',
+                servicesSubtitle: 'კომპლექსური გადაწყვეტილებები თქვენი წარმატებისთვის',
+                priceDisclaimer: '⚠️ ყველა ფასი სავარაუდოა და შეიძლება შეიცვალოს პროექტის მასშტაბის, სასწრაფობის და ბაზრის პირობების მიხედვით',
+                priceFrom: 'დან',
+                
+                // Service categories
+                eventOrganization: 'ღონისძიებების ორგანიზება',
+                moreEventTypes: '12+ ტიპის ღონისძიება',
+                corporateTurnkey: 'კორპორატივები «ჩაბარებული»',
+                childrenParties: 'ბავშვთა დღესასწაულები',
+                weddingsAnniversaries: 'ქორწილები და იუბილეები',
+                businessConferences: 'ბიზნეს კონფერენციები',
+                
+                visualDesign: 'ვიზუალური დიზაინი',
+                remoteWorldwide: 'დისტანციურად მთელ მსოფლიოში',
+                logoIdentity: 'ლოგო და იდენტობა',
+                printDesign: 'პოლიგრაფიული დიზაინი',
+                visualization3D: '3D ვიზუალიზაცია',
+                webDesign: 'ვებ-დიზაინი',
+                
+                videoProduction: 'ვიდეო-წარმოება',
+                ideaToVideo: 'იდეიდან მზა ვიდეომდე',
+                presentationVideos: 'პრეზენტაციის ვიდეოები',
+                commercialVideos: 'სარეკლამო ვიდეოები',
+                animationMotion: 'ანიმაცია და მოუშენ-დიზაინი',
+                videoEditing: 'ვიდეო მონტაჟი',
+                
+                audioVoice: 'აუდიო და ხმა',
+                professionalVoiceover: 'პროფესიონალური გახმოვანება',
+                commercialVoiceover: 'რეკლამის გახმოვანება',
+                eventDJ: 'ღონისძიების DJ (3-4 საათი)',
+                audioBranding: 'აუდიო-ბრენდინგი',
+                podcastsAudiobooks: 'პოდკასტები და აუდიო წიგნები',
+                
+                entertainment: 'გართობა',
+                artistsActivities: 'არტისტები და აქტივობები',
+                hostsAnimators: 'წამყვანები და ანიმატორები',
+                magiciansIllusionists: 'ფოკუსნიკები და ილუზიონისტები',
+                musicalGroups: 'მუსიკალური ჯგუფები',
+                interactiveZones: 'ინტერაქტიული ზონები',
+                
+                digitalServices: 'ციფრული სერვისები',
+                modernSolutions: 'თანამედროვე გადაწყვეტილებები',
+                smmPromotion: 'SMM და პრომოუშენი',
+                onlineStreaming: 'ონლაინ-ტრანსლიაცია',
+                arvrActivations: 'AR/VR აქტივაციები',
+                mobileApps: 'მობილური აპლიკაციები',
+                
+                // Turnkey
+                turnkeyPackage: 'პაკეტი «ჩაბარებული»',
+                discussDetails: 'დეტალების განხილვა',
+                fullService: 'სრული მომსახურება იდეიდან რეალიზაციამდე',
+                negotiable: 'შეთანხმებით',
+                
+                // Portfolio
+                portfolioTitle1: 'ჩვენი',
+                portfolioTitle2: 'პორტფოლიო',
+                portfolioSubtitle: 'ისტორიები, რომლებიც შთააგონებენ',
+                portfolioPlaceholder: 'აქ შეიძლება იყოს თქვენი ღონისძიება!',
+                portfolioPlaceholderDesc: 'მალე აქ გამოჩნდება ჩვენი საუკეთესო ნამუშევრები.',
                 
                 // Contact
-                'contact.title': 'დაგვიკავშირდით',
-                'contact.subtitle': 'მოდით შევქმნათ რაღაც საოცარი ერთად!',
-                'contact.description': 'Creative.Partner - თქვენი სანდო პარტნიორი დაუვიწყარი ღონისძიებების და შემოქმედებითი პროექტების შექმნაში. ჩვენ ვმუშაობთ როგორც ლოკალურად საქართველოში, ასევე დისტანციურად მთელ მსოფლიოში.',
-                'contact.location': 'თბილისი, საქართველო',
-                'contact.hours': 'ორშ-პარ: 10:00 - 19:00',
+                contactTitle1: 'დაგვიკავშირდით',
+                contactTitle2: '',
+                contactHeading: 'მოდით შევქმნათ რაღაც საოცარი ერთად!',
+                contactDescription: 'Creative.Partner - თქვენი საიმედო პარტნიორი დაუვიწყარი ღონისძიებებისა და კრეატიული პროექტების შექმნაში.',
+                contactLocation: 'თბილისი, საქართველო',
+                contactHours: 'ორშ-პარ: 10:00 - 19:00',
+                
+                // Form
+                formName: 'თქვენი სახელი',
+                formNamePlaceholder: 'როგორ მოგმართოთ?',
+                formContact: 'ელ.ფოსტა ან ტელეფონი',
+                formContactPlaceholder: 'როგორ დაგიკავშირდეთ?',
+                formService: 'მომსახურების ტიპი',
+                formServiceSelect: 'აირჩიეთ მომსახურება',
+                formServiceEvent: 'ღონისძიების ორგანიზება',
+                formServiceDesign: 'დიზაინი და ბრენდინგი',
+                formServiceVideo: 'ვიდეო წარმოება',
+                formServiceComplex: 'კომპლექსური გადაწყვეტა',
+                formServiceOther: 'სხვა',
+                formMessage: 'მოგვიყევით პროექტის შესახებ',
+                formMessagePlaceholder: 'აღწერეთ თქვენი იდეა ან ამოცანა...',
+                formSubmit: 'განაცხადის გაგზავნა',
                 
                 // Footer
-                'footer.tagline': 'ოცნებების განხორციელება.<br>ესკიზიდან ზეიმამდე.',
-                'footer.rights': 'ყველა უფლება დაცულია',
+                footerTagline: 'ვაქცევთ ოცნებებს რეალობად.<br>ნახატიდან წვეულებამდე.',
+                footerServices: 'სერვისები',
+                footerServiceEvents: 'ღონისძიებების ორგანიზება',
+                footerServiceDesign: 'დიზაინი და ბრენდინგი',
+                footerServiceVideo: 'ვიდეო წარმოება',
+                footerServiceAudio: 'აუდიო და გახმოვანება',
+                footerCompany: 'კომპანია',
+                footerAbout: 'ჩვენს შესახებ',
+                footerPortfolio: 'პორტფოლიო',
+                footerPrices: 'ფასები',
+                footerContact: 'კონტაქტი',
+                footerFollow: 'გამოგვყევით',
+                footerRights: 'ყველა უფლება დაცულია.',
                 
-                // Common
-                'pricing_disclaimer': 'ყველა ფასი ინფორმაციულია და შეიძლება შეიცვალოს პროექტის მასშტაბის, სასწრაფოობის, უნიკალური მოთხოვნების და ბაზრის პირობების გათვალისწინებით',
-                'add_to_cart': 'კალათაში დამატება',
-                'individual_services.title': 'აირჩიეთ <span class="gradient-text">საჭირო სერვისები</span>',
+                // Cart & Modal
+                cartTitle: 'კალათა',
+                cartEmpty: 'კალათა ცარიელია',
+                cartTotal: 'სულ:',
+                cartCheckout: 'შეკვეთის გაფორმება',
+                modalTitle: 'შეკვეთის გაფორმება',
+                modalName: 'თქვენი სახელი',
+                modalPhone: 'საკონტაქტო ტელეფონი',
+                modalComment: 'კომენტარი შეკვეთაზე',
+                modalSubmit: 'შეკვეთის გაგზავნა',
+                
+                // Notification
+                notificationText: 'სერვისი დამატებულია კალათაში',
+                notificationOrderSent: 'განაცხადი გაგზავნილია!',
             }
         };
 
-        // Global variables and state
-        let cart = [];
-        let currentLang = localStorage.getItem('preferredLanguage') || 'ru';
-        let currentCurrency = localStorage.getItem('preferredCurrency') || 'usd';
-        const exchangeRate = 2.7;
+        // Services data
+        const servicesData = {
+            events: {
+                icon: '🎪',
+                services: [
+                    { nameKey: 'corporateTurnkey', basePrice: 800 },
+                    { nameKey: 'childrenParties', basePrice: 150 },
+                    { nameKey: 'weddingsAnniversaries', basePrice: 500 },
+                    { nameKey: 'businessConferences', basePrice: 400 }
+                ]
+            },
+            design: {
+                icon: '🎨',
+                services: [
+                    { nameKey: 'logoIdentity', basePrice: 100 },
+                    { nameKey: 'printDesign', basePrice: 50 },
+                    { nameKey: 'visualization3D', basePrice: 200 },
+                    { nameKey: 'webDesign', basePrice: 300 }
+                ]
+            },
+            video: {
+                icon: '🎬',
+                services: [
+                    { nameKey: 'presentationVideos', basePrice: 175 },
+                    { nameKey: 'commercialVideos', basePrice: 250 },
+                    { nameKey: 'animationMotion', basePrice: 150 },
+                    { nameKey: 'videoEditing', basePrice: 80 }
+                ]
+            },
+            audio: {
+                icon: '🎤',
+                services: [
+                    { nameKey: 'commercialVoiceover', basePrice: 40 },
+                    { nameKey: 'eventDJ', basePrice: 100 },
+                    { nameKey: 'audioBranding', basePrice: 150 },
+                    { nameKey: 'podcastsAudiobooks', basePrice: 60 }
+                ]
+            },
+            entertainment: {
+                icon: '🎭',
+                services: [
+                    { nameKey: 'hostsAnimators', basePrice: 120 },
+                    { nameKey: 'magiciansIllusionists', basePrice: 150 },
+                    { nameKey: 'musicalGroups', basePrice: 300 },
+                    { nameKey: 'interactiveZones', basePrice: 200 }
+                ]
+            },
+            digital: {
+                icon: '📱',
+                services: [
+                    { nameKey: 'smmPromotion', basePrice: 200 },
+                    { nameKey: 'onlineStreaming', basePrice: 300 },
+                    { nameKey: 'arvrActivations', basePrice: 400 },
+                    { nameKey: 'mobileApps', basePrice: 500 }
+                ]
+            }
+        };
 
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set initial language and currency
-            document.getElementById('langSwitch').value = currentLang;
-            document.getElementById('currencySwitch').value = currentCurrency;
+        // Initialize services
+        function initializeServices() {
+            const servicesGrid = document.getElementById('servicesGrid');
+            const t = translations[currentLang];
             
-            // Apply saved preferences
-            switchLanguage(currentLang);
-            switchCurrency(currentCurrency);
+            servicesGrid.innerHTML = '';
             
-            // Initialize other components
-            initSketchRealitySlider();
-            initScrollEffects();
-            initPortfolioFilters();
+            // Event Organization
+            createServiceCategory(servicesGrid, {
+                icon: servicesData.events.icon,
+                title: t.eventOrganization,
+                subtitle: t.moreEventTypes,
+                services: servicesData.events.services
+            });
             
-            setTimeout(() => {
-                document.getElementById('loader')?.classList.add('hidden');
-            }, 1000);
-        });
+            // Visual Design
+            createServiceCategory(servicesGrid, {
+                icon: servicesData.design.icon,
+                title: t.visualDesign,
+                subtitle: t.remoteWorldwide,
+                services: servicesData.design.services
+            });
+            
+            // Video Production
+            createServiceCategory(servicesGrid, {
+                icon: servicesData.video.icon,
+                title: t.videoProduction,
+                subtitle: t.ideaToVideo,
+                services: servicesData.video.services
+            });
+            
+            // Audio & Voice
+            createServiceCategory(servicesGrid, {
+                icon: servicesData.audio.icon,
+                title: t.audioVoice,
+                subtitle: t.professionalVoiceover,
+                services: servicesData.audio.services
+            });
+            
+            // Entertainment
+            createServiceCategory(servicesGrid, {
+                icon: servicesData.entertainment.icon,
+                title: t.entertainment,
+                subtitle: t.artistsActivities,
+                services: servicesData.entertainment.services
+            });
+            
+            // Digital Services
+            createServiceCategory(servicesGrid, {
+                icon: servicesData.digital.icon,
+                title: t.digitalServices,
+                subtitle: t.modernSolutions,
+                services: servicesData.digital.services
+            });
+            
+            // Turnkey Package
+            createServiceCategory(servicesGrid, {
+                icon: '🎯',
+                title: t.turnkeyPackage,
+                subtitle: t.discussDetails,
+                services: [
+                    { nameKey: 'fullService', basePrice: null, negotiable: true }
+                ]
+            });
+        }
 
-        // Language switching
-        function switchLanguage(lang) {
+        function createServiceCategory(container, data) {
+            const t = translations[currentLang];
+            const categoryCard = document.createElement('div');
+            categoryCard.className = 'category-card';
+            
+            categoryCard.innerHTML = `
+                <div class="category-header">
+                    <div class="category-icon">${data.icon}</div>
+                    <h3 class="category-title">${data.title}</h3>
+                    <p class="category-count">${data.subtitle}</p>
+                </div>
+                <div class="category-services">
+                    <ul class="service-list">
+                        ${data.services.map(service => `
+                            <li class="service-item" onclick="addToCart('${t[service.nameKey]}', ${service.basePrice || 0}, ${service.negotiable || false})">
+                                <span class="service-item-name">${t[service.nameKey]}</span>
+                                <span class="service-price">
+                                    ${service.negotiable ? t.negotiable : formatPrice(service.basePrice)}
+                                </span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            container.appendChild(categoryCard);
+        }
+
+        function formatPrice(basePrice) {
+            const t = translations[currentLang];
+            if (currentCurrency === 'gel') {
+                const gelPrice = Math.round(basePrice * exchangeRate);
+                return `${t.priceFrom} ₾${gelPrice}`;
+            }
+            return `${t.priceFrom} $${basePrice}`;
+        }
+
+        // Language change handler
+        function changeLanguage(lang) {
             currentLang = lang;
-            localStorage.setItem('preferredLanguage', lang);
-            document.getElementById('langSwitch').value = lang;
-            
+            updatePageLanguage();
+            initializeServices();
+            updateSliderLabel();
+        }
+
+        function updatePageLanguage() {
             const elements = document.querySelectorAll('[data-lang-key]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-lang-key');
-                if (translations[lang] && translations[lang][key]) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        if (el.hasAttribute('placeholder')) {
-                            el.placeholder = translations[lang][key];
-                        } else {
-                            el.value = translations[lang][key];
-                        }
+            elements.forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[currentLang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[currentLang][key];
                     } else {
-                        el.innerHTML = translations[lang][key];
+                        element.innerHTML = translations[currentLang][key];
                     }
                 }
             });
         }
 
-        // Currency switching
-        function switchCurrency(currency) {
-            currentCurrency = currency;
-            localStorage.setItem('preferredCurrency', currency);
-            document.getElementById('currencySwitch').value = currency;
-            
-            const priceElements = document.querySelectorAll('[data-price]');
-            priceElements.forEach(el => {
-                const basePrice = parseInt(el.getAttribute('data-price'));
-                if (currency === 'gel') {
-                    const gelPrice = Math.round(basePrice * exchangeRate);
-                    el.textContent = `от ₾${gelPrice}`;
-                } else {
-                    el.textContent = `от $${basePrice}`;
-                }
-            });
-            
-            // Update cart total
-            updateCartDisplay();
+        function updateSliderLabel() {
+            const sketchReality = document.getElementById('sketchReality');
+            sketchReality.setAttribute('data-label', translations[currentLang].dreamToReality);
         }
 
-        // Header scroll effect
-        function initScrollEffects() {
-            window.addEventListener('scroll', () => {
-                const header = document.getElementById('header');
-                if (window.scrollY > 50) {
-                    header?.classList.add('scrolled');
-                } else {
-                    header?.classList.remove('scrolled');
-                }
-            });
+        // Currency change handler
+        function changeCurrency(currency) {
+            currentCurrency = currency;
+            initializeServices();
+            updateCart();
         }
+
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+            initializeServices();
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
 
         // Mobile menu toggle
         function toggleMobileMenu() {
             const navMenu = document.getElementById('navMenu');
-            navMenu?.classList.toggle('active');
+            navMenu.classList.toggle('active');
         }
 
         // Smooth scrolling for navigation links
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('a[href^="#"]')) {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const href = e.target.closest('a').getAttribute('href');
-                const target = document.querySelector(href);
+                const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    document.getElementById('navMenu')?.classList.remove('active');
+                    // Close mobile menu if open
+                    document.getElementById('navMenu').classList.remove('active');
                 }
-            }
+            });
         });
 
         // Interactive Sketch to Reality Slider
-        function initSketchRealitySlider() {
-            const sliderHandle = document.getElementById('sliderHandle');
-            const sketchReality = document.getElementById('sketchReality');
-            const sketchSide = sketchReality?.querySelector('.sketch-side');
-            const realitySide = sketchReality?.querySelector('.reality-side');
+        const sliderHandle = document.getElementById('sliderHandle');
+        const sketchReality = document.getElementById('sketchReality');
+        const sketchSide = sketchReality.querySelector('.sketch-side');
+        const realitySide = sketchReality.querySelector('.reality-side');
+        
+        let isDragging = false;
+        let currentX = 50;
+
+        // Mouse events
+        sliderHandle.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+
+        // Touch events for mobile
+        sliderHandle.addEventListener('touchstart', startDragging);
+        document.addEventListener('touchmove', drag);
+        document.addEventListener('touchend', stopDragging);
+
+        function startDragging(e) {
+            isDragging = true;
+            sketchReality.style.cursor = 'ew-resize';
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
             
-            if (!sliderHandle || !sketchReality) return;
+            const rect = sketchReality.getBoundingClientRect();
+            let x = e.clientX || (e.touches && e.touches[0].clientX);
+            currentX = ((x - rect.left) / rect.width) * 100;
+            currentX = Math.max(10, Math.min(90, currentX));
             
-            let isDragging = false;
-            let currentX = 50;
+            updateSlider();
+        }
 
-            function startDragging(e) {
-                isDragging = true;
-                sketchReality.style.cursor = 'ew-resize';
-                e.preventDefault();
-            }
+        function stopDragging() {
+            isDragging = false;
+            sketchReality.style.cursor = 'default';
+        }
 
-            function drag(e) {
-                if (!isDragging) return;
-                
-                const rect = sketchReality.getBoundingClientRect();
-                let x = e.clientX || (e.touches && e.touches[0]?.clientX);
-                if (!x) return;
-                
-                currentX = ((x - rect.left) / rect.width) * 100;
-                currentX = Math.max(10, Math.min(90, currentX));
-                
-                updateSlider();
-            }
+        function updateSlider() {
+            sliderHandle.style.left = currentX + '%';
+            sketchSide.style.width = currentX + '%';
+            realitySide.style.width = (100 - currentX) + '%';
+        }
 
-            function stopDragging() {
-                isDragging = false;
-                sketchReality.style.cursor = 'default';
-            }
-
-            function updateSlider() {
-                sliderHandle.style.left = currentX + '%';
-                if (sketchSide) sketchSide.style.width = currentX + '%';
-                if (realitySide) realitySide.style.width = (100 - currentX) + '%';
-            }
-
-            // Event listeners
-            sliderHandle.addEventListener('mousedown', startDragging);
-            document.addEventListener('mousemove', drag);
-            document.addEventListener('mouseup', stopDragging);
-            
-            sliderHandle.addEventListener('touchstart', startDragging);
-            document.addEventListener('touchmove', drag);
-            document.addEventListener('touchend', stopDragging);
-
-            // Auto-animate slider
+        // Auto-animate slider
+        let autoAnimation;
+        function startAutoAnimation() {
             let direction = 1;
-            setInterval(() => {
+            autoAnimation = setInterval(() => {
                 if (!isDragging) {
-                    currentX += direction * 0.3;
+                    currentX += direction * 0.5;
                     if (currentX >= 70 || currentX <= 30) {
                         direction *= -1;
                     }
                     updateSlider();
                 }
-            }, 100);
+            }, 50);
         }
 
-        // Portfolio filters
-        function initPortfolioFilters() {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
-            
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Update active button
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Filter items (implement your filtering logic here)
-                    const filter = this.textContent.toLowerCase();
-                    portfolioItems.forEach(item => {
-                        // This is where you would implement actual filtering based on data attributes
-                        item.style.display = 'block';
-                    });
-                });
-            });
-        }
+        // Start auto animation after page load
+        setTimeout(startAutoAnimation, 2000);
 
         // Cart functionality
         function toggleCart() {
-            document.getElementById('cart')?.classList.toggle('open');
+            document.getElementById('cart').classList.toggle('open');
         }
 
-        function addToCart(serviceName, price) {
-            cart.push({ 
-                name: serviceName, 
-                price: price,
-                id: Date.now()
-            });
-            updateCartDisplay();
-            showNotification('Услуга добавлена в корзину');
+        function addToCart(serviceName, price, negotiable = false) {
+            if (negotiable) {
+                showOrderForm();
+                return;
+            }
+            cart.push({ name: serviceName, price: price });
+            updateCart();
+            showNotification(translations[currentLang].notificationText);
         }
 
-        function updateCartDisplay() {
+        function updateCart() {
             const cartItems = document.getElementById('cartItems');
             const cartCount = document.getElementById('cartCount');
             const cartTotal = document.getElementById('cartTotal');
-            
-            if (!cartItems || !cartCount || !cartTotal) return;
+            const t = translations[currentLang];
             
             cartCount.textContent = cart.length;
             
             if (cart.length === 0) {
-                cartItems.innerHTML = '<p style="text-align: center; color: #999;">Корзина пуста</p>';
+                cartItems.innerHTML = `<p style="text-align: center; color: #999;">${t.cartEmpty}</p>`;
                 cartTotal.textContent = currentCurrency === 'gel' ? '₾0' : '$0';
             } else {
                 cartItems.innerHTML = cart.map((item, index) => `
                     <div class="cart-item">
                         <div>
                             <strong>${item.name}</strong><br>
-                            <small>${formatPrice(item.price)}</small>
+                            <small>${currentCurrency === 'gel' ? `₾${Math.round(item.price * exchangeRate)}` : `$${item.price}`}</small>
                         </div>
                         <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #999; cursor: pointer; font-size: 1.2rem;">×</button>
                     </div>
                 `).join('');
                 
                 const total = cart.reduce((sum, item) => sum + item.price, 0);
-                cartTotal.textContent = formatPrice(total);
+                if (currentCurrency === 'gel') {
+                    cartTotal.textContent = `₾${Math.round(total * exchangeRate)}`;
+                } else {
+                    cartTotal.textContent = `$${total}`;
+                }
             }
-        }
-
-        function formatPrice(price) {
-            if (currentCurrency === 'gel') {
-                return `₾${Math.round(price * exchangeRate)}`;
-            }
-            return `$${price}`;
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
-            updateCartDisplay();
+            updateCart();
         }
 
         function checkout() {
             if (cart.length === 0) {
-                showNotification('Корзина пуста');
+                alert(translations[currentLang].cartEmpty);
                 return;
             }
             document.getElementById('orderModal').style.display = 'flex';
             toggleCart();
         }
 
-        // Modal functions
-        function openContactModal() {
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function openTurnkeyModal() {
-            document.getElementById('turnkeyModal').style.display = 'flex';
-        }
-
-        function closeTurnkeyModal() {
-            document.getElementById('turnkeyModal').style.display = 'none';
-        }
-
         function closeModal() {
             document.getElementById('orderModal').style.display = 'none';
         }
 
-        // Notification system
-        function showNotification(message) {
+        function showOrderForm() {
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        // Notification
+        function showNotification(text) {
             const notification = document.getElementById('notification');
-            if (notification) {
-                notification.querySelector('.notification-text').textContent = message;
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
-            }
+            const notificationText = notification.querySelector('.notification-text');
+            notificationText.textContent = text;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
 
         function hideNotification() {
-            document.getElementById('notification')?.classList.remove('show');
+            document.getElementById('notification').classList.remove('show');
         }
 
         // Form submissions
-        document.addEventListener('submit', function(e) {
-            if (e.target.matches('form')) {
-                e.preventDefault();
-                showNotification('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
-                
-                // Reset form and close modals
-                setTimeout(() => {
-                    e.target.reset();
-                    closeModal();
-                    closeTurnkeyModal();
-                    
-                    // Clear cart if it's an order
-                    if (e.target.id === 'orderForm') {
-                        cart = [];
-                        updateCartDisplay();
-                    }
-                }, 1000);
-            }
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            await submitForm(formData, 'contact');
         });
+
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            // Add cart items to form data
+            if (cart.length > 0) {
+                const cartSummary = cart.map(item => `${item.name}: ${currentCurrency === 'gel' ? `₾${Math.round(item.price * exchangeRate)}` : `$${item.price}`}`).join(', ');
+                formData.append('cart', cartSummary);
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                formData.append('total', currentCurrency === 'gel' ? `₾${Math.round(total * exchangeRate)}` : `$${total}`);
+            }
+            
+            await submitForm(formData, 'order');
+        });
+
+        async function submitForm(formData, type = 'contact') {
+            try {
+                // Here you would normally send the data to your server
+                // For now, we'll just show a success message
+                
+                // Prepare data for Google Sheets
+                const data = {
+                    timestamp: new Date().toLocaleString(),
+                    type: type,
+                    name: formData.get('name'),
+                    contact: formData.get('contact') || formData.get('email'),
+                    phone: formData.get('phone') || '',
+                    service: formData.get('service') || '',
+                    message: formData.get('message') || formData.get('comment') || '',
+                    cart: formData.get('cart') || '',
+                    total: formData.get('total') || '',
+                    language: currentLang,
+                    currency: currentCurrency
+                };
+                
+                // Log data for debugging
+                console.log('Form submission:', data);
+                
+                showNotification(translations[currentLang].notificationOrderSent);
+                
+                // Reset form and close modal
+                if (type === 'order') {
+                    cart = [];
+                    updateCart();
+                    closeModal();
+                }
+                
+                // Reset the form
+                document.getElementById(type === 'order' ? 'orderForm' : 'contactForm').reset();
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Error submitting form. Please try again.');
+            }
+        }
 
         // Intersection Observer for animations
         const observerOptions = {
@@ -2601,14 +2522,12 @@
         }, observerOptions);
 
         // Observe elements for animation
-        setTimeout(() => {
-            document.querySelectorAll('.step-card, .category-card, .service-card, .portfolio-item').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        }, 500);
+        document.querySelectorAll('.step-card, .portfolio-placeholder').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
