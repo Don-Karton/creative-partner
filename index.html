@@ -58,11 +58,23 @@
             text-align: center;
             border: none;
             font-family: inherit;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .fixed-order-button.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
         }
 
         .fixed-order-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1);
             box-shadow: 0 8px 35px rgba(62, 185, 165, 0.5);
+        }
+
+        .fixed-order-button.hidden:hover {
+            transform: scale(0.8);
         }
 
         .fixed-order-button .button-text {
@@ -401,6 +413,9 @@
             box-shadow: 0 4px 20px rgba(62, 185, 165, 0.3);
             position: relative;
             overflow: hidden;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
         }
 
         .cta-button::before {
@@ -847,6 +862,33 @@
             box-shadow: 0 5px 20px rgba(62, 185, 165, 0.4);
         }
 
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading state */
+        .loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
         /* Footer */
         footer {
             background: var(--text-dark);
@@ -1219,9 +1261,25 @@
             right: 20px;
         }
 
+        .notification.success {
+            border-left-color: #28a745;
+        }
+
+        .notification.error {
+            border-left-color: #dc3545;
+        }
+
         .notification-icon {
             font-size: 1.5rem;
             color: var(--primary-color);
+        }
+
+        .notification.success .notification-icon {
+            color: #28a745;
+        }
+
+        .notification.error .notification-icon {
+            color: #dc3545;
         }
 
         .notification-text {
@@ -1249,7 +1307,7 @@
     </div>
 
     <!-- Fixed Order Button -->
-    <button class="fixed-order-button" onclick="showOrderForm()">
+    <button class="fixed-order-button" id="fixedOrderButton" onclick="showOrderForm()">
         <span class="button-text" data-lang-key="fixedOrderButton">Оставить заявку</span>
         <span class="button-subtext" data-lang-key="fixedOrderSubtext">поделитесь своей идеей прямо сейчас</span>
     </button>
@@ -1330,8 +1388,8 @@
                     </div>
                 </div>
                 
-                <div class="cta-group">
-                    <a href="#services" class="cta-button" data-lang-key="ctaOrder">Заказать услугу</a>
+                <div class="cta-group" id="heroCTAGroup">
+                    <button class="cta-button" onclick="showOrderForm()" data-lang-key="ctaOrder">Заказать услугу</button>
                     <a href="#portfolio" class="cta-button cta-button-outline" data-lang-key="ctaPortfolio">Смотреть портфолио</a>
                 </div>
             </div>
@@ -1473,7 +1531,7 @@
                         <label class="form-label" data-lang-key="formMessage">Расскажите о проекте</label>
                         <textarea class="form-textarea" name="message" placeholder="Опишите вашу идею или задачу..." data-lang-key="formMessagePlaceholder"></textarea>
                     </div>
-                    <button type="submit" class="form-submit" data-lang-key="formSubmit">Отправить заявку</button>
+                    <button type="submit" class="form-submit" data-lang-key="formSubmit" id="contactSubmitBtn">Отправить заявку</button>
                 </form>
             </div>
         </div>
@@ -1538,7 +1596,7 @@
                 <span data-lang-key="cartTotal">Итого:</span>
                 <span id="cartTotal">$0</span>
             </div>
-            <button class="form-submit" onclick="checkout()" data-lang-key="cartCheckout">Оформить заказ</button>
+            <button class="form-submit" onclick="checkout()" data-lang-key="cartCheckout" id="cartCheckoutBtn">Оформить заказ</button>
         </div>
     </div>
 
@@ -1564,7 +1622,7 @@
                     <label class="form-label" data-lang-key="modalComment">Комментарий к заказу</label>
                     <textarea class="form-textarea" name="comment"></textarea>
                 </div>
-                <button type="submit" class="form-submit" data-lang-key="modalSubmit">Отправить заказ</button>
+                <button type="submit" class="form-submit" data-lang-key="modalSubmit" id="orderSubmitBtn">Отправить заказ</button>
             </form>
         </div>
     </div>
@@ -1575,6 +1633,13 @@
         let currentLang = 'ru';
         let currentCurrency = 'usd';
         const exchangeRate = 2.7;
+
+        // Telegram Bot Configuration
+        const TELEGRAM_BOT_TOKEN = '7892330945:AAFgO4PxaLtgKBg2LzPHmCfTIdSgKx5QxDc'; // Replace with your bot token
+        const TELEGRAM_CHAT_ID = '1024823598'; // Replace with your chat ID
+
+        // Google Sheets Configuration  
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBX9DlKI2jhHCxlzQnDGQT1j6cPU4oKLaHm6wUMv3tW6vQxh6_4Y7MsQQU-Mq4I9t8nQ/exec'; // Replace with your script URL
 
         // Language translations
         const translations = {
@@ -1735,9 +1800,11 @@
                 modalComment: 'Комментарий к заказу',
                 modalSubmit: 'Отправить заказ',
                 
-                // Notification
+                // Notifications
                 notificationText: 'Услуга добавлена в корзину',
                 notificationOrderSent: 'Заявка отправлена!',
+                notificationError: 'Ошибка при отправке. Попробуйте еще раз.',
+                notificationSending: 'Отправка...',
             },
             en: {
                 // Navigation
@@ -1750,9 +1817,9 @@
                 
                 // Hero
                 heroFrom: 'From',
-                heroPicture: 'picture',
+                heroPicture: 'present',
                 heroTo: 'to',
-                heroParty: 'party',
+                heroParty: 'event',
                 heroTagline: 'Turning dreams into reality • Creating inspiring stories',
                 sketch1: 'Sketch',
                 sketch2: 'Idea',
@@ -1896,9 +1963,11 @@
                 modalComment: 'Order comment',
                 modalSubmit: 'Submit order',
                 
-                // Notification
+                // Notifications
                 notificationText: 'Service added to cart',
                 notificationOrderSent: 'Request sent!',
+                notificationError: 'Error sending. Please try again.',
+                notificationSending: 'Sending...',
             },
             ge: {
                 // Navigation
@@ -2057,9 +2126,11 @@
                 modalComment: 'კომენტარი შეკვეთაზე',
                 modalSubmit: 'შეკვეთის გაგზავნა',
                 
-                // Notification
+                // Notifications
                 notificationText: 'სერვისი დამატებულია კალათაში',
                 notificationOrderSent: 'განაცხადი გაგზავნილია!',
+                notificationError: 'შეცდომა გაგზავნისას. სცადეთ თავიდან.',
+                notificationSending: 'იგზავნება...',
             }
         };
 
@@ -2120,6 +2191,30 @@
                 ]
             }
         };
+
+        // Floating button visibility handler
+        function handleFloatingButtonVisibility() {
+            const fixedButton = document.getElementById('fixedOrderButton');
+            const heroCTA = document.getElementById('heroCTAGroup');
+            const contactForm = document.querySelector('.contact-form');
+            
+            const heroRect = heroCTA.getBoundingClientRect();
+            const contactRect = contactForm.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Check if hero CTA is visible
+            const heroVisible = heroRect.top < windowHeight && heroRect.bottom > 0;
+            
+            // Check if contact form is visible
+            const contactVisible = contactRect.top < windowHeight && contactRect.bottom > 0;
+            
+            // Hide fixed button when other order buttons are visible
+            if (heroVisible || contactVisible) {
+                fixedButton.classList.add('hidden');
+            } else {
+                fixedButton.classList.remove('hidden');
+            }
+        }
 
         // Initialize services
         function initializeServices() {
@@ -2258,6 +2353,83 @@
             updateCart();
         }
 
+        // Email service
+        async function sendEmail(data) {
+            // This is a placeholder for email functionality
+            // You'll need to implement this with your email service (EmailJS, Nodemailer, etc.)
+            console.log('Email data:', data);
+            return Promise.resolve();
+        }
+
+        // Google Sheets service
+        async function sendToGoogleSheets(data) {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                return true;
+            } catch (error) {
+                console.error('Error sending to Google Sheets:', error);
+                return false;
+            }
+        }
+
+        // Telegram service
+        async function sendToTelegram(data) {
+            try {
+                const message = formatTelegramMessage(data);
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                return response.ok;
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+                return false;
+            }
+        }
+
+        function formatTelegramMessage(data) {
+            const t = translations[currentLang];
+            let message = `<b>🎨 Creative.Partner - Новая заявка!</b>\n\n`;
+            message += `<b>Тип:</b> ${data.type === 'contact' ? 'Контакт' : 'Заказ'}\n`;
+            message += `<b>Имя:</b> ${data.name}\n`;
+            message += `<b>Контакт:</b> ${data.contact || data.email || data.phone}\n`;
+            if (data.phone && data.phone !== data.contact) {
+                message += `<b>Телефон:</b> ${data.phone}\n`;
+            }
+            if (data.service) {
+                message += `<b>Услуга:</b> ${data.service}\n`;
+            }
+            if (data.cart) {
+                message += `<b>Корзина:</b> ${data.cart}\n`;
+                message += `<b>Сумма:</b> ${data.total}\n`;
+            }
+            if (data.message) {
+                message += `<b>Сообщение:</b> ${data.message}\n`;
+            }
+            message += `\n<b>Язык:</b> ${data.language.toUpperCase()}`;
+            message += `\n<b>Валюта:</b> ${data.currency.toUpperCase()}`;
+            message += `\n<b>Время:</b> ${data.timestamp}`;
+            
+            return message;
+        }
+
         // Loader
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -2274,6 +2446,9 @@
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            // Handle floating button visibility
+            handleFloatingButtonVisibility();
         });
 
         // Mobile menu toggle
@@ -2429,18 +2604,41 @@
         }
 
         // Notification
-        function showNotification(text) {
+        function showNotification(text, type = 'success') {
             const notification = document.getElementById('notification');
             const notificationText = notification.querySelector('.notification-text');
+            const notificationIcon = notification.querySelector('.notification-icon');
+            
             notificationText.textContent = text;
-            notification.classList.add('show');
+            notification.className = `notification show ${type}`;
+            
+            if (type === 'success') {
+                notificationIcon.textContent = '✓';
+            } else if (type === 'error') {
+                notificationIcon.textContent = '⚠';
+            } else if (type === 'info') {
+                notificationIcon.textContent = 'ℹ';
+            }
+            
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 3000);
+            }, 4000);
         }
 
         function hideNotification() {
             document.getElementById('notification').classList.remove('show');
+        }
+
+        // Set button loading state
+        function setButtonLoading(buttonId, loading) {
+            const button = document.getElementById(buttonId);
+            if (loading) {
+                button.disabled = true;
+                button.classList.add('loading');
+            } else {
+                button.disabled = false;
+                button.classList.remove('loading');
+            }
         }
 
         // Form submissions
@@ -2466,16 +2664,19 @@
         });
 
         async function submitForm(formData, type = 'contact') {
+            const buttonId = type === 'contact' ? 'contactSubmitBtn' : 'orderSubmitBtn';
+            
             try {
-                // Here you would normally send the data to your server
-                // For now, we'll just show a success message
+                setButtonLoading(buttonId, true);
+                showNotification(translations[currentLang].notificationSending, 'info');
                 
-                // Prepare data for Google Sheets
+                // Prepare data for all services
                 const data = {
                     timestamp: new Date().toLocaleString(),
                     type: type,
                     name: formData.get('name'),
                     contact: formData.get('contact') || formData.get('email'),
+                    email: formData.get('email') || '',
                     phone: formData.get('phone') || '',
                     service: formData.get('service') || '',
                     message: formData.get('message') || formData.get('comment') || '',
@@ -2485,24 +2686,39 @@
                     currency: currentCurrency
                 };
                 
-                // Log data for debugging
-                console.log('Form submission:', data);
+                // Send to all services
+                const promises = [
+                    sendEmail(data),
+                    sendToGoogleSheets(data),
+                    sendToTelegram(data)
+                ];
                 
-                showNotification(translations[currentLang].notificationOrderSent);
+                const results = await Promise.allSettled(promises);
                 
-                // Reset form and close modal
-                if (type === 'order') {
-                    cart = [];
-                    updateCart();
-                    closeModal();
+                // Check if at least one service succeeded
+                const hasSuccess = results.some(result => result.status === 'fulfilled' && result.value === true);
+                
+                if (hasSuccess) {
+                    showNotification(translations[currentLang].notificationOrderSent, 'success');
+                    
+                    // Reset form and close modal
+                    if (type === 'order') {
+                        cart = [];
+                        updateCart();
+                        closeModal();
+                    }
+                    
+                    // Reset the form
+                    document.getElementById(type === 'order' ? 'orderForm' : 'contactForm').reset();
+                } else {
+                    throw new Error('All services failed');
                 }
-                
-                // Reset the form
-                document.getElementById(type === 'order' ? 'orderForm' : 'contactForm').reset();
                 
             } catch (error) {
                 console.error('Error submitting form:', error);
-                alert('Error submitting form. Please try again.');
+                showNotification(translations[currentLang].notificationError, 'error');
+            } finally {
+                setButtonLoading(buttonId, false);
             }
         }
 
@@ -2528,6 +2744,11 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        // Initialize floating button visibility on page load
+        setTimeout(() => {
+            handleFloatingButtonVisibility();
+        }, 100);
     </script>
 </body>
 </html>
